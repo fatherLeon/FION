@@ -1,24 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dby-WX-Er2">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="PyH-6O-xK6">
+            <objects>
+                <navigationController id="dby-WX-Er2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z5b-Sd-rve">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="XgQ-9V-Esi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cdQ-IH-w2V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-731" y="5"/>
+        </scene>
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="FIONApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LTa-fc-az9">
+                                <rect key="frame" x="10" y="103" width="373" height="34.333333333333343"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="유저 닉네임...." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-gp-fkD">
+                                        <rect key="frame" x="0.0" y="0.0" width="311.33333333333331" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRc-28-9f2">
+                                        <rect key="frame" x="319.33333333333331" y="0.0" width="53.666666666666686" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="검색"/>
+                                        <connections>
+                                            <action selector="didTapSearchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Emg-9A-Ov6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vaq-op-bfH">
+                                <rect key="frame" x="0.0" y="167.33333333333334" width="393" height="20.333333333333343"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpj-p5-Qnw">
+                                        <rect key="frame" x="10" y="0.0" width="472" height="20.333333333333332"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SjW-JN-5po">
+                                                <rect key="frame" x="0.0" y="0.99999999999999822" width="19.666666666666668" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7nw-8Y-Zqp">
+                                                <rect key="frame" x="19.666666666666664" y="0.99999999999999822" width="19.666666666666664" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yXT-37-i5d">
+                                                <rect key="frame" x="39.333333333333336" y="0.99999999999999822" width="19.666666666666664" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eVR-ce-Pie">
+                                                <rect key="frame" x="58.999999999999993" y="0.99999999999999822" width="19.666666666666664" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="d7M-AK-odJ">
+                                                <rect key="frame" x="78.666666666666671" y="0.99999999999999822" width="19.666666666666671" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AQ7-OD-yX7">
+                                                <rect key="frame" x="98.333333333333329" y="0.99999999999999822" width="19.666666666666671" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nJ0-mH-FvE">
+                                                <rect key="frame" x="118" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vhz-YN-Xgd">
+                                                <rect key="frame" x="137.66666666666666" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4IK-CB-nOj">
+                                                <rect key="frame" x="157.33333333333334" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CV1-Hh-tpg">
+                                                <rect key="frame" x="177" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NSa-RJ-kWr">
+                                                <rect key="frame" x="196.66666666666666" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="W5T-MM-JET">
+                                                <rect key="frame" x="216.33333333333334" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cgz-pu-aBf">
+                                                <rect key="frame" x="236" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Fpf-19-x6h">
+                                                <rect key="frame" x="255.66666666666666" y="0.99999999999999822" width="19.666666666666657" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HnB-FB-EOw">
+                                                <rect key="frame" x="275.33333333333331" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CPA-qw-9uD">
+                                                <rect key="frame" x="295" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DG9-nP-6qO">
+                                                <rect key="frame" x="314.66666666666669" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ex1-OP-efE">
+                                                <rect key="frame" x="334.33333333333331" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7KU-V3-9s2">
+                                                <rect key="frame" x="354" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ECL-Ul-F7Z">
+                                                <rect key="frame" x="373.66666666666669" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lIW-gB-zNI">
+                                                <rect key="frame" x="393.33333333333331" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="phq-f4-Wdc">
+                                                <rect key="frame" x="413" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="U4u-Wo-bLd">
+                                                <rect key="frame" x="432.66666666666669" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cricket.ball" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XeK-M1-Fvv">
+                                                <rect key="frame" x="452.33333333333331" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="height" secondItem="Vaq-op-bfH" secondAttribute="height" id="Ai1-Cc-c2b"/>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="height" secondItem="PgZ-ib-dcC" secondAttribute="height" id="V5a-vl-g58"/>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="bottom" secondItem="G5C-SW-dGl" secondAttribute="bottom" constant="20.333333333333332" id="Xqh-qc-vMT"/>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="leading" secondItem="G5C-SW-dGl" secondAttribute="leading" constant="10" id="bWa-Hf-UgT"/>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="top" secondItem="G5C-SW-dGl" secondAttribute="top" id="brc-3c-dEE"/>
+                                    <constraint firstItem="kpj-p5-Qnw" firstAttribute="leading" secondItem="Vaq-op-bfH" secondAttribute="leading" constant="10" id="fWf-1S-KPp"/>
+                                    <constraint firstItem="G5C-SW-dGl" firstAttribute="trailing" secondItem="kpj-p5-Qnw" secondAttribute="trailing" constant="9.9999999999999929" id="kzN-mF-5j8"/>
+                                    <constraint firstAttribute="trailing" secondItem="kpj-p5-Qnw" secondAttribute="trailing" constant="10" id="mPj-8c-fsM"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="G5C-SW-dGl"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="PgZ-ib-dcC"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Vaq-op-bfH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FVK-HH-O0X"/>
+                            <constraint firstItem="Vaq-op-bfH" firstAttribute="top" secondItem="LTa-fc-az9" secondAttribute="bottom" constant="30" id="Krp-BM-MFz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LTa-fc-az9" secondAttribute="trailing" constant="10" id="Qdq-Sg-dON"/>
+                            <constraint firstItem="LTa-fc-az9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ru9-Im-14b"/>
+                            <constraint firstItem="LTa-fc-az9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="UeH-DU-k5i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vaq-op-bfH" secondAttribute="trailing" id="bs1-n1-2o7"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mxU-hL-BiI"/>
+                    <connections>
+                        <outlet property="bestPlayerStackView" destination="LTa-fc-az9" id="Jg9-1i-acb"/>
+                        <outlet property="userSearchTextField" destination="Z4g-gp-fkD" id="Nre-6V-5xe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="70.992366412213741" y="4.9295774647887329"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cricket.ball" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
