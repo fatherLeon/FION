@@ -15,6 +15,8 @@
 		26AD318429B3B1A4001E8BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AD318229B3B1A4001E8BE4 /* LaunchScreen.storyboard */; };
 		26AD318D29B3BA33001E8BE4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD318C29B3BA33001E8BE4 /* Player.swift */; };
 		26AD319029B3C0F2001E8BE4 /* APIURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD318F29B3C0F2001E8BE4 /* APIURLs.swift */; };
+		26C6B69A29B4832300090547 /* APIKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26C6B69929B4832300090547 /* APIKey.plist */; };
+		26C6B69D29B483E800090547 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C6B69C29B483E800090547 /* Bundle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		26AD318529B3B1A4001E8BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26AD318C29B3BA33001E8BE4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		26AD318F29B3C0F2001E8BE4 /* APIURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIURLs.swift; sourceTree = "<group>"; };
+		26C6B69929B4832300090547 /* APIKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKey.plist; sourceTree = "<group>"; };
+		26C6B69C29B483E800090547 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +79,10 @@
 		26AD318B29B3BA1F001E8BE4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				26C6B69B29B483D300090547 /* Extension */,
 				26AD318E29B3BCC7001E8BE4 /* DTO */,
 				26AD318F29B3C0F2001E8BE4 /* APIURLs.swift */,
+				26C6B69929B4832300090547 /* APIKey.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -87,6 +93,14 @@
 				26AD318C29B3BA33001E8BE4 /* Player.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		26C6B69B29B483D300090547 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				26C6B69C29B483E800090547 /* Bundle.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +163,7 @@
 			files = (
 				26AD318429B3B1A4001E8BE4 /* LaunchScreen.storyboard in Resources */,
 				26AD318129B3B1A4001E8BE4 /* Assets.xcassets in Resources */,
+				26C6B69A29B4832300090547 /* APIKey.plist in Resources */,
 				26AD317F29B3B1A4001E8BE4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26AD318D29B3BA33001E8BE4 /* Player.swift in Sources */,
+				26C6B69D29B483E800090547 /* Bundle.swift in Sources */,
 				26AD317C29B3B1A4001E8BE4 /* MainViewController.swift in Sources */,
 				26AD317829B3B1A4001E8BE4 /* AppDelegate.swift in Sources */,
 				26AD319029B3C0F2001E8BE4 /* APIURLs.swift in Sources */,
