@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Player {
+struct Player: Decodable {
     let id: UInt32
     let name: String
 }
