@@ -22,8 +22,24 @@ class MainViewController: UIViewController {
         configureUserTextField()
         configureSearchButton()
     }
+    
+    @objc func didTapSearchButton() {
+        print(self.userTextField.text)
+    }
 }
 
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == self.userTextField {
+            didTapSearchButton()
+        }
+        
+        return true
+    }
+}
+
+
+// MARK: - UI
 extension MainViewController {
     
     func configureLogoImageView() {
@@ -41,6 +57,8 @@ extension MainViewController {
     }
     
     func configureUserTextField() {
+        self.userTextField.delegate = self
+        
         self.userTextField.translatesAutoresizingMaskIntoConstraints = false
         self.userTextField.borderStyle = .roundedRect
         self.userTextField.placeholder = "유저 닉네임을 입력해주세요"
@@ -69,5 +87,7 @@ extension MainViewController {
             self.searchButton.leadingAnchor.constraint(equalTo: self.userTextField.trailingAnchor, constant: 10),
             self.searchButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
+        
+        self.searchButton.addTarget(self, action: #selector(didTapSearchButton), for: .touchUpInside)
     }
 }
