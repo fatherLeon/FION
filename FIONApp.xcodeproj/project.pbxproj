@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		26058CE029C8798700DC3EEA /* APIKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26058CDF29C8798700DC3EEA /* APIKey.plist */; };
 		26058CE229C879D100DC3EEA /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE129C879D100DC3EEA /* Bundle+extension.swift */; };
+		26058CE429C8819500DC3EEA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE329C8819500DC3EEA /* UserInfo.swift */; };
 		26AD317829B3B1A4001E8BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD317729B3B1A4001E8BE4 /* AppDelegate.swift */; };
 		26AD317A29B3B1A4001E8BE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD317929B3B1A4001E8BE4 /* SceneDelegate.swift */; };
 		26AD317C29B3B1A4001E8BE4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		26058CDF29C8798700DC3EEA /* APIKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKey.plist; sourceTree = "<group>"; };
 		26058CE129C879D100DC3EEA /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
+		26058CE329C8819500DC3EEA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		26AD317429B3B1A4001E8BE4 /* FIONApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FIONApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26AD317729B3B1A4001E8BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26AD317929B3B1A4001E8BE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				26AD318529B3B1A4001E8BE4 /* Info.plist */,
 				26058CDF29C8798700DC3EEA /* APIKey.plist */,
 				26058CE129C879D100DC3EEA /* Bundle+extension.swift */,
+				26058CE329C8819500DC3EEA /* UserInfo.swift */,
 			);
 			path = FIONApp;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				26AD317C29B3B1A4001E8BE4 /* MainViewController.swift in Sources */,
 				26AD317829B3B1A4001E8BE4 /* AppDelegate.swift in Sources */,
 				26AD317A29B3B1A4001E8BE4 /* SceneDelegate.swift in Sources */,
+				26058CE429C8819500DC3EEA /* UserInfo.swift in Sources */,
 				26058CE229C879D100DC3EEA /* Bundle+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
