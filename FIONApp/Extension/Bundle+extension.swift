@@ -5,7 +5,7 @@
 //  Created by 강민수 on 2023/03/20.
 //
 
-import Foundation
+import UIKit
 
 extension Bundle {
     var apiKey: String {
@@ -15,5 +15,12 @@ extension Bundle {
         guard let key = resource["APIKey"] as? String else { fatalError("API Key를 입력해주세요") }
         
         return key
+    }
+    
+    var logo: UIImage? {
+        guard let assetData = NSDataAsset(name: "FIFALogo", bundle: .main),
+              let logoImage = UIImage(data: assetData.data) else { return nil }
+        
+        return logoImage
     }
 }
