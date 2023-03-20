@@ -18,8 +18,7 @@ extension Bundle {
     }
     
     var logo: UIImage? {
-        guard let assetData = NSDataAsset(name: "FIFALogo", bundle: .main),
-              let logoImage = UIImage(data: assetData.data) else { return nil }
+        let logoImage = UIImage(named: "FIFALogo")
         
         return logoImage
     }
