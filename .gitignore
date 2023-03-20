@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift,macos,swiftpackagemanager,swiftpm,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,swiftpackagemanager,swiftpm,xcode
 
+FIONApp/APIKey.plist
+
 ### macOS ###
 # General
 .DS_Store
