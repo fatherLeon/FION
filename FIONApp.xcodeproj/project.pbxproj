@@ -45,6 +45,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26058CE929C885F300DC3EEA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				26058CE129C879D100DC3EEA /* Bundle+extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		26058CEA29C885FB00DC3EEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26058CE329C8819500DC3EEA /* UserInfo.swift */,
+				26058CE529C8825A00DC3EEA /* UserMatch.swift */,
+				26058CE729C8845900DC3EEA /* Match.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		26AD316B29B3B1A4001E8BE4 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +82,8 @@
 		26AD317629B3B1A4001E8BE4 /* FIONApp */ = {
 			isa = PBXGroup;
 			children = (
+				26058CEA29C885FB00DC3EEA /* Model */,
+				26058CE929C885F300DC3EEA /* Extension */,
 				26AD317729B3B1A4001E8BE4 /* AppDelegate.swift */,
 				26AD317929B3B1A4001E8BE4 /* SceneDelegate.swift */,
 				26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */,
@@ -71,10 +91,6 @@
 				26AD318229B3B1A4001E8BE4 /* LaunchScreen.storyboard */,
 				26AD318529B3B1A4001E8BE4 /* Info.plist */,
 				26058CDF29C8798700DC3EEA /* APIKey.plist */,
-				26058CE129C879D100DC3EEA /* Bundle+extension.swift */,
-				26058CE329C8819500DC3EEA /* UserInfo.swift */,
-				26058CE529C8825A00DC3EEA /* UserMatch.swift */,
-				26058CE729C8845900DC3EEA /* Match.swift */,
 			);
 			path = FIONApp;
 			sourceTree = "<group>";
