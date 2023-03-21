@@ -14,7 +14,7 @@ struct UserInfoObject: Fetchable {
     let level: Int
     
     enum CodingKeys: String, CodingKey {
-        case userId = "accessid"
+        case userId = "accessId"
         case name = "nickname"
         case level
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    let networkModel = NetworkModel<UserInfoObject>()
+    
     var logoImageView = UIImageView()
     var userTextField = UITextField()
     var searchButton = UIButton(type: .roundedRect)
@@ -24,8 +26,17 @@ class MainViewController: UIViewController {
     }
     
     @objc func didTapSearchButton() {
-        // 가장 많이 사용되는 선수들 (포지션 별)
-        print(self.userTextField.text)
+        guard let nickName = self.userTextField.text else { return }
+        
+        self.networkModel.fetchUserInfo(nickName) { result in
+            switch result {
+            case .success(let data):
+                guard let data = data as? UserInfoObject else { return }
+                print(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
     } 
 }
 

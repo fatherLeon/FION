@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkModel {
+class NetworkModel<modelObject> {
     let contentType: ContentType = .userInfo
     
     func getUserInfoURL(items: [URLQueryItem]) throws -> URL {
@@ -21,22 +21,28 @@ class NetworkModel {
         return url
     }
     
-    func fetchUserInfo<Fetchable>(_ nickName: String, completion: @escaping (Result<Fetchable, NetworkError>) -> Void) where Fetchable: Decodable {
+    func fetchUserInfo(_ nickName: String, completion: @escaping (Result<modelObject, NetworkError>) -> Void) where modelObject: Decodable {
         
         do {
             let url = try getUserInfoURL(items: [URLQueryItem(name: "nickname", value: nickName)])
+            var request = URLRequest(url: url)
             
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                guard error != nil,
-                      let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
+            request.addValue("\(Bundle.main.apiKey)", forHTTPHeaderField: "Authorization")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
                     completion(.failure(.networkError))
+                    return
+                }
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {
+                    completion(.failure(.responseError))
                     return
                 }
                 
                 if let data = data {
                     do {
-                        let decodingData = try JSONDecoder().decode(Fetchable.self, from: data)
+                        let decodingData = try JSONDecoder().decode(modelObject.self, from: data)
                         completion(.success(decodingData))
                     } catch {
                         completion(.failure(.decodingError))
