@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func didTapSearchButton() {
+        // 가장 많이 사용되는 선수들 (포지션 별)
         print(self.userTextField.text)
     } 
 }

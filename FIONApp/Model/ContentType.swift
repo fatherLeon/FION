@@ -11,4 +11,8 @@ enum ContentType {
     case userInfo
     case userMatch
     case match
+    
+    var baseURL: URL? {
+        return URL(string: "https://api.nexon.co.kr/fifaonline4/v1.0")
+    }
 }

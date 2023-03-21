@@ -8,7 +8,7 @@
 import Foundation
 
 // https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={nickname}
-struct UserInfoObject: Decodable {
+struct UserInfoObject: Fetchable {
     let userId: String
     let name: String
     let level: Int
