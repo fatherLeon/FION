@@ -7,7 +7,7 @@
 
 import Foundation
 //https://api.nexon.co.kr/fifaonline4/v1.0/matches/{matchid}
-struct Match: Decodable {
+struct MatchObject: Decodable {
     let id: String
     let date: String
     let type: Int

@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
     
     @objc func didTapSearchButton() {
         print(self.userTextField.text)
-    }
+    } 
 }
 
 extension MainViewController: UITextFieldDelegate {
