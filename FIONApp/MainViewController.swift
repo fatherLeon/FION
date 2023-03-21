@@ -29,13 +29,6 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: UITextFieldDelegate {
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField == self.userTextField {
-            didTapSearchButton()
-        }
-        
-        return true
-    }
 }
 
 
