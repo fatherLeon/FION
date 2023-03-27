@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkModel<modelObject> {
+class NetworkModel {
     let contentType: ContentType = .userInfo
     
     func getUserInfoURL(items: [URLQueryItem]) throws -> URL {
@@ -21,7 +21,7 @@ class NetworkModel<modelObject> {
         return url
     }
     
-    func fetchUserInfo(_ nickName: String, completion: @escaping (Result<modelObject, NetworkError>) -> Void) where modelObject: Decodable {
+    func fetchUserInfo<modelObject: Decodable>(_ nickName: String, completion: @escaping (Result<modelObject, NetworkError>) -> Void) {
         
         do {
             let url = try getUserInfoURL(items: [URLQueryItem(name: "nickname", value: nickName)])
