@@ -16,7 +16,7 @@ final class ModelManager<T> {
         self.type = type
     }
     
-    func fetchData<T: Decodable>(handler: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchDataByJson<T: Decodable>(handler: @escaping (Result<T, NetworkError>) -> Void) {
         guard let request = networkManager.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
