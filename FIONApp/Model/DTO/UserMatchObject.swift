@@ -6,8 +6,7 @@
 //
 
 import Foundation
-// https://api.nexon.co.kr/fifaonline4/v1.0/users/{accessid}/matches?matchtype={matchtype}&offset={offset}&limit={limit}
 
-struct UserMatchObject: Fetchable {
+struct UserMatchObject: Decodable {
     let matchIds: [String]
 }
