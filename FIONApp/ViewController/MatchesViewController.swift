@@ -15,12 +15,15 @@ class MatchesViewController: UITableViewController {
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
     private var matchManager: NetworkManager<MatchObject>? = nil
     private var matches: [String] = []
+    private var matchesData: [MatchObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = userName
+        
+        tableView.register(MatchTableViewCell.self, forCellReuseIdentifier: MatchTableViewCell.identifier)
         
         fetchUserMatches()
     }
@@ -32,14 +35,30 @@ class MatchesViewController: UITableViewController {
             switch result {
             case .success(let data):
                 self?.matches = data.matchIds
+                self?.fetchMatch()
             case .failure(let error):
                 print(error)
             }
         })
     }
     
-    func fetchMatch(matchid: String) {
-        matchManager = NetworkManager(type: .match(matchid: matchid))
+    func fetchMatch() {
+        self.matches.forEach { matchid in
+            matchManager = NetworkManager(type: .match(matchid: matchid))
+            
+            matchManager?.fetchDataByJson(handler: { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.matchesData.append(data)
+                case .failure(let error):
+                    print("matchData - \(error)")
+                }
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            })
+        }
     }
 }
 
@@ -54,5 +73,15 @@ extension MatchesViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return matches.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.updateLabelText(self.matchesData[indexPath.row])
+        
+        return cell
     }
 }
