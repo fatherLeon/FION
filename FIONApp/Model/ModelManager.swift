@@ -31,4 +31,14 @@ final class ModelManager<T> {
             }
         }
     }
+    
+    private func decodingToJson<T: Decodable>(data: Data) -> T? {
+        do {
+            let decodingData = try JSONDecoder().decode(T.self, from: data)
+            
+            return decodingData
+        } catch {
+            return nil
+        }
+    }
 }
