@@ -44,6 +44,17 @@ class MainViewController: UIViewController {
 // MARK: - UI
 extension MainViewController {
     
+    private func presentErrorAlert(message: String) {
+        let alertController = UIAlertController(title: message,
+                                                message: nil,
+                                                preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .cancel)
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true)
+    }
+    
     private func configureLogoImageView() {
         self.logoImageView.translatesAutoresizingMaskIntoConstraints = false
         self.logoImageView.contentMode = .scaleToFill
