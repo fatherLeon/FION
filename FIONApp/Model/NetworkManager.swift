@@ -1,5 +1,5 @@
 //
-//  NetworkModel.swift
+//  NetworkManger.swift
 //  FIONApp
 //
 //  Created by 강민수 on 2023/03/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkModel {
+struct NetworkManager {
     let session: URLSession
     
     func makeRequest(contentType: ContentType) -> URLRequest? {
