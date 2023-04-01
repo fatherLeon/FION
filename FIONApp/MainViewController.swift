@@ -31,7 +31,6 @@ class MainViewController: UIViewController {
         self.networkModel.fetchUserInfo(nickName) { result in
             switch result {
             case .success(let data):
-                guard let data = data as? UserInfoObject else { return }
                 print(data)
             case .failure(let error):
                 print(error)
