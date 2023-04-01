@@ -16,7 +16,7 @@ class MatchTableViewCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textAlignment = .center
         
         return label
@@ -27,7 +27,7 @@ class MatchTableViewCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textAlignment = .center
         
         return label
@@ -38,7 +38,7 @@ class MatchTableViewCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
         
         return label
@@ -49,6 +49,7 @@ class MatchTableViewCell: UITableViewCell {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 6
+        stackView.distribution = .fillEqually
         
         return stackView
     }()
@@ -75,11 +76,11 @@ class MatchTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             mainStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
-            mainStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -40),
+            mainStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            mainStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
             
-            mainStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
+            mainStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
+            mainStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30)
         ])
     }
 }

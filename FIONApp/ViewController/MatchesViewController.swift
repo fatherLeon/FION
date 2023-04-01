@@ -14,11 +14,7 @@ class MatchesViewController: UITableViewController {
     
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
     private var matchManager: NetworkManager<MatchObject>? = nil
-    private var matches: [String] = [] {
-        willSet {
-            fetchMatch()
-        }
-    }
+    private var matches: [String] = ["63f18d93e982f639cfe3822c"]
     private var matchesData: [MatchObject] = []
 
     override func viewDidLoad() {
@@ -29,7 +25,8 @@ class MatchesViewController: UITableViewController {
         
         tableView.register(MatchTableViewCell.self, forCellReuseIdentifier: MatchTableViewCell.identifier)
         
-        fetchUserMatches()
+//        fetchUserMatches()
+        fetchMatchInfo()
     }
     
     func fetchUserMatches() {
@@ -39,6 +36,24 @@ class MatchesViewController: UITableViewController {
             switch result {
             case .success(let data):
                 self?.matches = data.matchIds
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    func fetchMatchInfo() {
+        matchManager = NetworkManager(session: .shared, type: .match(matchid: self.matches[0]))
+        
+        matchManager?.fetchDataByJson(handler: { [weak self] result in
+            switch result {
+            case .success(let data):
+                print(data)
+                self?.matchesData.append(data)
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             case .failure(let error):
                 print(error)
             }
