@@ -49,7 +49,6 @@ final class NetworkManager<T> {
             switch result {
             case .success(let data):
                 let image = UIImage(data: data)
-                
                 handler(.success(image))
             case .failure(let error):
                 handler(.failure(error))
@@ -62,7 +61,6 @@ final class NetworkManager<T> {
     private func decodingToJson(data: Data) -> T? where T: Decodable{
         do {
             let decodingData = try JSONDecoder().decode(T.self, from: data)
-            
             return decodingData
         } catch {
             return nil
