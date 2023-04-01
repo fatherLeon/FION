@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var userNetworkManager: NetworkManager<UserInfoObject>? = nil
+    
     var logoImageView = UIImageView()
     var userTextField = UITextField()
     var searchButton = UIButton(type: .roundedRect)
@@ -24,8 +26,18 @@ class MainViewController: UIViewController {
     }
     
     @objc func didTapSearchButton() {
-        guard let nickName = self.userTextField.text else { return }
+        guard let nickname = self.userTextField.text else { return }
         
+        userNetworkManager = NetworkManager(type: ContentType.userInfo(nickname: nickname))
+        
+        userNetworkManager?.fetchDataByJson { result in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
     } 
 }
 

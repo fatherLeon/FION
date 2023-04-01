@@ -16,7 +16,7 @@ final class NetworkManager<T> {
         self.type = type
     }
     
-    func fetchDataByJson<T: Decodable>(handler: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchDataByJson(handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         guard let request = networkModel.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
@@ -25,12 +25,13 @@ final class NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
             switch result {
             case .success(let data):
-                guard let data = self?.decodingToJson(data: data, type: T.self) else {
+                print("data - \(data)")
+                guard let decodingData = self?.decodingToJson(data: data) else {
                     handler(.failure(.decodingError))
                     return
                 }
                 
-                handler(.success(data))
+                handler(.success(decodingData))
             case .failure(let error):
                 handler(.failure(error))
             }
@@ -59,9 +60,9 @@ final class NetworkManager<T> {
         task.resume()
     }
     
-    private func decodingToJson<T: Decodable>(data: Data, type: T.Type) -> T? {
+    private func decodingToJson(data: Data) -> T? where T: Decodable{
         do {
-            let decodingData = try JSONDecoder().decode(type, from: data)
+            let decodingData = try JSONDecoder().decode(T.self, from: data)
             
             return decodingData
         } catch {
