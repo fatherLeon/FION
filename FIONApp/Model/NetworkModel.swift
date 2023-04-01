@@ -18,7 +18,7 @@ class NetworkModel {
         return request
     }
     
-    func fetchUserInfo(_ nickName: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+    func fetchUserInfo(completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask {
         do {
             let url = try getUserInfoURL(items: [URLQueryItem(name: "nickname", value: nickName)])
             var request = URLRequest(url: url)
