@@ -9,8 +9,6 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    let networkModel = NetworkModel<UserInfoObject>()
-    
     var logoImageView = UIImageView()
     var userTextField = UITextField()
     var searchButton = UIButton(type: .roundedRect)
@@ -28,14 +26,6 @@ class MainViewController: UIViewController {
     @objc func didTapSearchButton() {
         guard let nickName = self.userTextField.text else { return }
         
-        self.networkModel.fetchUserInfo(nickName) { result in
-            switch result {
-            case .success(let data):
-                print(data)
-            case .failure(let error):
-                print(error)
-            }
-        }
     } 
 }
 
