@@ -5,24 +5,24 @@
 //  Created by 강민수 on 2023/04/01.
 //
 
-import Foundation
+import UIKit
 
 final class ModelManager<T> {
     private let type: ContentType
-    private let networkManager: NetworkManager
+    private let networkModel: NetworkManager
     
     init(session: URLSession = .shared, type: ContentType) {
-        self.networkManager = NetworkManager(session: session)
+        self.networkModel = NetworkManager(session: session)
         self.type = type
     }
     
     func fetchDataByJson<T: Decodable>(handler: @escaping (Result<T, NetworkError>) -> Void) {
-        guard let request = networkManager.makeRequest(contentType: self.type) else {
+        guard let request = networkModel.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
         }
         
-        let task = networkManager.makeURLSessionDataTask(request: request) { [weak self] result in
+        let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let data = self?.decodingToJson(data: data, type: T.self) else {
@@ -39,8 +39,22 @@ final class ModelManager<T> {
         task.resume()
     }
     
-    func fetchDataByImage(handler: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
+        guard let request = networkModel.makeRequest(contentType: self.type) else {
+            handler(.failure(.invalidURL))
+            return
+        }
         
+        let task = networkModel.makeURLSessionDataTask(request: request) { result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                
+                handler(.success(image))
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
     }
     
     private func decodingToJson<T: Decodable>(data: Data, type: T.Type) -> T? {
