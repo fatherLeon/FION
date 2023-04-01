@@ -8,11 +8,14 @@
 import Foundation
 
 final class ModelManager<T> {
+    private let type: ContentType
     private let networkManager: NetworkManager
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared, type: ContentType) {
         self.networkManager = NetworkManager(session: session)
+        self.type = type
     }
     
-    
+    func fetchData(handler: @escaping (Result<T, NetworkError>) -> Void) {
+    }
 }
