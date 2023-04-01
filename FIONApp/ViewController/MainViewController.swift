@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .systemBackground
         
         configureLogoImageView()
@@ -34,7 +35,15 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 // 전적 상세조회 뷰로 이동
-                print(data)
+                let userID = Int(data.userId) ?? 0
+                
+                DispatchQueue.main.async {
+                    let matchesVC = MatchesViewController(style: .insetGrouped)
+                    
+                    matchesVC.userID = userID
+                    
+                    self?.navigationController?.pushViewController(matchesVC, animated: true)
+                }
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.presentErrorAlert(message: error.localizedDescription)
