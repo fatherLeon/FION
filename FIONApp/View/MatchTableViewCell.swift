@@ -64,7 +64,9 @@ class MatchTableViewCell: UITableViewCell {
     }
     
     func updateLabelText(_ data: MatchObject) {
-        
+        self.myNicknameLabel.text = data.matchInfo[0].nickname
+        self.enemyNicknameLabel.text = data.matchInfo[1].nickname
+        self.scoreLabel.text = data.matchInfo[0].matchDetail.matchResult
     }
     
     // MARK: - UI
