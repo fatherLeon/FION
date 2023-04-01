@@ -40,7 +40,8 @@ enum ContentType {
             return userMatchURL
         case .match(let matchid):
             var matchURL = URL(string: "matches", relativeTo: self.baseURL)
-            matchURL = URL(string: matchid, relativeTo: matchURL)
+            
+            matchURL?.append(path: "\(matchid)")
             
             return matchURL
         }
