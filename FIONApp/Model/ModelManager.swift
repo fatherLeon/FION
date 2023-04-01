@@ -22,19 +22,24 @@ final class ModelManager<T> {
             return
         }
         
-        let task = networkManager.makeURLSessionDataTask(request: request) { result in
+        let task = networkManager.makeURLSessionDataTask(request: request) { [weak self] result in
             switch result {
             case .success(let data):
+                guard let data = self?.decodingToJson(data: data, type: T.self) else {
+                    handler(.failure(.decodingError))
+                    return
+                }
                 
+                handler(.success(data))
             case .failure(let error):
                 handler(.failure(error))
             }
         }
     }
     
-    private func decodingToJson<T: Decodable>(data: Data) -> T? {
+    private func decodingToJson<T: Decodable>(data: Data, type: T.Type) -> T? {
         do {
-            let decodingData = try JSONDecoder().decode(T.self, from: data)
+            let decodingData = try JSONDecoder().decode(type, from: data)
             
             return decodingData
         } catch {
