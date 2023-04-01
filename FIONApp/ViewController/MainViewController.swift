@@ -34,13 +34,11 @@ class MainViewController: UIViewController {
         userNetworkManager?.fetchDataByJson { [weak self] result in
             switch result {
             case .success(let data):
-                // 전적 상세조회 뷰로 이동
-                let userID = Int(data.userId) ?? 0
-                
                 DispatchQueue.main.async {
                     let matchesVC = MatchesViewController(style: .insetGrouped)
                     
-                    matchesVC.userID = userID
+                    matchesVC.userName = data.name
+                    matchesVC.userID = data.userId
                     
                     self?.navigationController?.pushViewController(matchesVC, animated: true)
                 }

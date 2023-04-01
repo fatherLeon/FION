@@ -25,7 +25,6 @@ final class NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
             switch result {
             case .success(let data):
-                print("data - \(data)")
                 guard let decodingData = self?.decodingToJson(data: data) else {
                     handler(.failure(.decodingError))
                     return
@@ -50,7 +49,6 @@ final class NetworkManager<T> {
             switch result {
             case .success(let data):
                 let image = UIImage(data: data)
-                
                 handler(.success(image))
             case .failure(let error):
                 handler(.failure(error))
@@ -63,7 +61,6 @@ final class NetworkManager<T> {
     private func decodingToJson(data: Data) -> T? where T: Decodable{
         do {
             let decodingData = try JSONDecoder().decode(T.self, from: data)
-            
             return decodingData
         } catch {
             return nil

@@ -9,4 +9,8 @@ import Foundation
 
 struct UserMatchObject: Decodable {
     let matchIds: [String]
+    
+    init(from decoder: Decoder) throws {
+        matchIds = try decoder.singleValueContainer().decode([String].self)
+    }
 }
