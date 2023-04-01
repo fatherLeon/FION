@@ -9,27 +9,46 @@ import UIKit
 
 class MatchesViewController: UITableViewController {
     
-    var userID: Int = 0
+    var userID: String = ""
     var userName: String = ""
     
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
+    private var matches: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = userName
+        
+        fetchUserMatches()
     }
+    
+    func fetchUserMatches() {
+        userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 10))
+        
+        userMatchesManager?.fetchDataByJson(handler: { [weak self] result in
+            switch result {
+            case .success(let data):
+                print(data)
+                self?.matches = data.matchIds
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+}
 
-    // MARK: - Table view data source
 
+// MARK: - DataSource
+extension MatchesViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return matches.count
     }
 }
