@@ -8,18 +8,6 @@
 import Foundation
 
 class NetworkModel {
-    
-    func getUserInfoURL(items: [URLQueryItem]) throws -> URL {
-        var userInfoURL = URL(string: "users", relativeTo: contentType.baseURL)
-        userInfoURL = userInfoURL?.appending(queryItems: items)
-        
-        guard let url = userInfoURL else {
-            throw NetworkError.invalidURL
-        }
-        
-        return url
-    }
-    
     func makeRequest(contentType: ContentType) -> URLRequest? {
         guard let url = contentType.url else { return nil }
         
