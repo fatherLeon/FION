@@ -39,7 +39,9 @@ final class ModelManager<T> {
         task.resume()
     }
     
-    
+    func fetchDataByImage(handler: @escaping (Result<T, NetworkError>) -> Void) {
+        
+    }
     
     private func decodingToJson<T: Decodable>(data: Data, type: T.Type) -> T? {
         do {
