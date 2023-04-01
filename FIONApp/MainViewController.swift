@@ -30,12 +30,14 @@ class MainViewController: UIViewController {
         
         userNetworkManager = NetworkManager(type: ContentType.userInfo(nickname: nickname))
         
-        userNetworkManager?.fetchDataByJson { result in
+        userNetworkManager?.fetchDataByJson { [weak self] result in
             switch result {
             case .success(let data):
                 print(data)
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.presentErrorAlert(message: error.localizedDescription)
+                }
             }
         }
     } 
