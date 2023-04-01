@@ -55,6 +55,8 @@ final class NetworkManager<T> {
                 handler(.failure(error))
             }
         }
+        
+        task.resume()
     }
     
     private func decodingToJson<T: Decodable>(data: Data, type: T.Type) -> T? {
