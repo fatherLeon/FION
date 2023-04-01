@@ -16,6 +16,19 @@ final class ModelManager<T> {
         self.type = type
     }
     
-    func fetchData(handler: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchData<T: Decodable>(handler: @escaping (Result<T, NetworkError>) -> Void) {
+        guard let request = networkManager.makeRequest(contentType: self.type) else {
+            handler(.failure(.invalidURL))
+            return
+        }
+        
+        let task = networkManager.makeURLSessionDataTask(request: request) { result in
+            switch result {
+            case .success(let data):
+                
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
     }
 }
