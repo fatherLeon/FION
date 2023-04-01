@@ -114,17 +114,25 @@
 		26AD317629B3B1A4001E8BE4 /* FIONApp */ = {
 			isa = PBXGroup;
 			children = (
+				26D3562229D86FBD003940C2 /* ViewController */,
 				26058CEA29C885FB00DC3EEA /* Model */,
 				26058CE929C885F300DC3EEA /* Extension */,
 				26AD317729B3B1A4001E8BE4 /* AppDelegate.swift */,
 				26AD317929B3B1A4001E8BE4 /* SceneDelegate.swift */,
-				26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */,
 				26AD318029B3B1A4001E8BE4 /* Assets.xcassets */,
 				26AD318229B3B1A4001E8BE4 /* LaunchScreen.storyboard */,
 				26AD318529B3B1A4001E8BE4 /* Info.plist */,
 				26058CDF29C8798700DC3EEA /* APIKey.plist */,
 			);
 			path = FIONApp;
+			sourceTree = "<group>";
+		};
+		26D3562229D86FBD003940C2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		26E8C43329D8301000665180 /* ContentTypeTests */ = {

@@ -63,15 +63,17 @@ extension MainViewController {
     
     private func configureLogoImageView() {
         self.logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.logoImageView.contentMode = .scaleToFill
+        self.logoImageView.contentMode = .scaleAspectFill
         self.logoImageView.image = Bundle.main.logo
+        self.logoImageView.clipsToBounds = true
         
         self.view.addSubview(self.logoImageView)
         
         NSLayoutConstraint.activate([
             self.logoImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.logoImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.logoImageView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            self.logoImageView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.logoImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1)
         ])
     }
     
@@ -80,8 +82,13 @@ extension MainViewController {
         
         self.userTextField.translatesAutoresizingMaskIntoConstraints = false
         self.userTextField.borderStyle = .roundedRect
-        self.userTextField.placeholder = "유저 닉네임을 입력해주세요"
+        self.userTextField.backgroundColor = .systemGray
         self.userTextField.textColor = .systemGreen
+        
+        let attributedOption: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
+        let placeholderText = NSAttributedString(string: "유저 닉네임을 입력해주세요", attributes: attributedOption)
+        
+        self.userTextField.attributedPlaceholder = placeholderText
         
         self.view.addSubview(self.userTextField)
         
