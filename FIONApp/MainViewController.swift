@@ -41,10 +41,6 @@ class MainViewController: UIViewController {
     } 
 }
 
-extension MainViewController: UITextFieldDelegate {
-}
-
-
 // MARK: - UI
 extension MainViewController {
     
