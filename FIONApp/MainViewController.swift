@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
         userNetworkManager?.fetchDataByJson { [weak self] result in
             switch result {
             case .success(let data):
+                // 전적 상세조회 뷰로 이동
                 print(data)
             case .failure(let error):
                 DispatchQueue.main.async {
