@@ -9,7 +9,6 @@ import Foundation
 
 enum ContentType {
     case userInfo(nickname: String)
-    // https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={nickname}
     case userMatch(id: String, matchType: Int, offset: Int = 0, limit: Int = 100)
     case match(matchid: String)
     
