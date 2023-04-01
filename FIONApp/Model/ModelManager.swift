@@ -7,6 +7,12 @@
 
 import Foundation
 
-class ModelManager<T> {
+final class ModelManager<T> {
+    private let networkManager: NetworkManager
+    
+    init(session: URLSession = .shared) {
+        self.networkManager = NetworkManager(session: session)
+    }
+    
     
 }
