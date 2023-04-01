@@ -8,11 +8,26 @@
 import Foundation
 
 enum ContentType {
-    case userInfo
+    case userInfo(String)
+    // https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={nickname}
     case userMatch
     case match
     
-    var baseURL: URL? {
+    private var baseURL: URL? {
         return URL(string: "https://api.nexon.co.kr/fifaonline4/v1.0/")
+    }
+    
+    var url: URL? {
+        switch self {
+        case .userInfo(let nickname):
+            var userURL = URL(string: "users", relativeTo: self.baseURL)
+            let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
+            
+            userURL?.append(queryItems: [nicknameQuery])
+            
+            return userURL
+        default:
+            return nil
+        }
     }
 }

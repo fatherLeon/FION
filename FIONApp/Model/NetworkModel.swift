@@ -21,6 +21,10 @@ class NetworkModel {
         return url
     }
     
+    func makeRequest(contentType: ContentType) -> URLRequest {
+        
+    }
+    
     func fetchUserInfo(_ nickName: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         do {
             let url = try getUserInfoURL(items: [URLQueryItem(name: "nickname", value: nickName)])
