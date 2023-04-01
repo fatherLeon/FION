@@ -14,7 +14,11 @@ class MatchesViewController: UITableViewController {
     
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
     private var matchManager: NetworkManager<MatchObject>? = nil
-    private var matches: [String] = []
+    private var matches: [String] = [] {
+        willSet {
+            fetchMatch()
+        }
+    }
     private var matchesData: [MatchObject] = []
 
     override func viewDidLoad() {
@@ -29,50 +33,27 @@ class MatchesViewController: UITableViewController {
     }
     
     func fetchUserMatches() {
-        userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 10))
+        userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 5))
         
         userMatchesManager?.fetchDataByJson(handler: { [weak self] result in
             switch result {
             case .success(let data):
                 self?.matches = data.matchIds
-                self?.fetchMatch()
             case .failure(let error):
                 print(error)
             }
         })
     }
-    
-    func fetchMatch() {
-        self.matches.forEach { matchid in
-            matchManager = NetworkManager(type: .match(matchid: matchid))
-            
-            matchManager?.fetchDataByJson(handler: { [weak self] result in
-                switch result {
-                case .success(let data):
-                    self?.matchesData.append(data)
-                case .failure(let error):
-                    print("matchData - \(error)")
-                }
-                
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            })
-        }
-    }
 }
-
 
 // MARK: - DataSource
 extension MatchesViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return matches.count
+        return matchesData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

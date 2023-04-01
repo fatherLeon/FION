@@ -71,6 +71,8 @@ class MatchTableViewCell: UITableViewCell {
     
     // MARK: - UI
     private func configureUI() {
+        self.contentView.addSubview(mainStackView)
+        
         NSLayoutConstraint.activate([
             mainStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
