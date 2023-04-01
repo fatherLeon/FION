@@ -26,8 +26,7 @@ enum ContentType {
             
             return userURL
         case .userMatch(let id, let matchType, let offset, let limit):
-            var userMatchURL = URL(string: "users", relativeTo: self.baseURL)
-            userMatchURL = URL(string: id, relativeTo: userMatchURL)
+            var userMatchURL = URL(string: id, relativeTo: self.baseURL)
             userMatchURL = URL(string: "matches", relativeTo: userMatchURL)
             
             let matchTypeQuery = URLQueryItem(name: "matchtype", value: "\(matchType)")
