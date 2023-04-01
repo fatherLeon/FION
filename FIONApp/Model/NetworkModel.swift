@@ -8,7 +8,6 @@
 import Foundation
 
 class NetworkModel {
-    let contentType: ContentType = .userInfo
     
     func getUserInfoURL(items: [URLQueryItem]) throws -> URL {
         var userInfoURL = URL(string: "users", relativeTo: contentType.baseURL)
