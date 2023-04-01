@@ -25,7 +25,6 @@ final class NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
             switch result {
             case .success(let data):
-                print("data - \(data)")
                 guard let decodingData = self?.decodingToJson(data: data) else {
                     handler(.failure(.decodingError))
                     return

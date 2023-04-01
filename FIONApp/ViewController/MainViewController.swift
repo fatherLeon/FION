@@ -40,6 +40,7 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     let matchesVC = MatchesViewController(style: .insetGrouped)
                     
+                    matchesVC.userName = data.name
                     matchesVC.userID = userID
                     
                     self?.navigationController?.pushViewController(matchesVC, animated: true)

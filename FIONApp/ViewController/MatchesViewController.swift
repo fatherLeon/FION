@@ -10,9 +10,15 @@ import UIKit
 class MatchesViewController: UITableViewController {
     
     var userID: Int = 0
+    var userName: String = ""
+    
+    private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = userName
     }
 
     // MARK: - Table view data source
