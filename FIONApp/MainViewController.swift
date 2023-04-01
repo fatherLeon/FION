@@ -9,11 +9,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var userNetworkManager: NetworkManager<UserInfoObject>? = nil
+    private var userNetworkManager: NetworkManager<UserInfoObject>? = nil
     
-    var logoImageView = UIImageView()
-    var userTextField = UITextField()
-    var searchButton = UIButton(type: .roundedRect)
+    private var logoImageView = UIImageView()
+    private var userTextField = UITextField()
+    private var searchButton = UIButton(type: .roundedRect)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
 // MARK: - UI
 extension MainViewController {
     
-    func configureLogoImageView() {
+    private func configureLogoImageView() {
         self.logoImageView.translatesAutoresizingMaskIntoConstraints = false
         self.logoImageView.contentMode = .scaleToFill
         self.logoImageView.image = Bundle.main.logo
@@ -58,7 +58,7 @@ extension MainViewController {
         ])
     }
     
-    func configureUserTextField() {
+    private func configureUserTextField() {
         self.userTextField.delegate = self
         
         self.userTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ extension MainViewController {
         ])
     }
     
-    func configureSearchButton() {
+    private func configureSearchButton() {
         self.searchButton.translatesAutoresizingMaskIntoConstraints = false
         self.searchButton.setTitle("검색", for: .normal)
         self.searchButton.layer.cornerRadius = 4
