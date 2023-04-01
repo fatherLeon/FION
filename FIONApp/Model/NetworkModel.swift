@@ -21,8 +21,14 @@ class NetworkModel {
         return url
     }
     
-    func makeRequest(contentType: ContentType) -> URLRequest {
+    func makeRequest(contentType: ContentType) -> URLRequest? {
+        guard let url = contentType.url else { return nil }
         
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        return request
     }
     
     func fetchUserInfo(_ nickName: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
