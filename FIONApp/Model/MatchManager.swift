@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatchManager {
+class MatchManager {
     private let matchId: [String]
     private var networkManagers: [NetworkManager<MatchObject>] = []
     var matchesInfo: [MatchObject] = []
@@ -23,6 +23,15 @@ struct MatchManager {
     }
     
     func fetchMatchInfo() {
-        
+        networkManagers.forEach { manager in
+            manager.fetchDataByJson { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.matchesInfo.append(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }
