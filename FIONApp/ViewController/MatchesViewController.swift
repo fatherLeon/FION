@@ -26,6 +26,12 @@ class MatchesViewController: UITableViewController {
         tableView.register(MatchTableViewCell.self, forCellReuseIdentifier: MatchTableViewCell.identifier)
         
         fetchUserMatches()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .matchesInfo, object: nil)
+    }
+    
+    @objc private func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     func fetchUserMatches() {
