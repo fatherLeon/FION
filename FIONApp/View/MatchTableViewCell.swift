@@ -68,11 +68,23 @@ class MatchTableViewCell: UITableViewCell {
         if data.matchInfo[0].nickname == target {
             self.myNicknameLabel.text = data.matchInfo[0].nickname
             self.enemyNicknameLabel.text = data.matchInfo[1].nickname
-            self.scoreLabel.text = data.matchInfo[0].matchDetail.matchResult
+            
+            var scoreText = ""
+            scoreText += "\(data.matchInfo[0].shoot["goalTotalDisplay"]!) "
+            scoreText += data.matchInfo[0].matchDetail.matchResult
+            scoreText += " \(data.matchInfo[1].shoot["goalTotalDisplay"]!)"
+            
+            self.scoreLabel.text = scoreText
         } else {
             self.myNicknameLabel.text = data.matchInfo[1].nickname
             self.enemyNicknameLabel.text = data.matchInfo[0].nickname
-            self.scoreLabel.text = data.matchInfo[1].matchDetail.matchResult
+            
+            var scoreText = ""
+            scoreText += "\(data.matchInfo[1].shoot["goalTotalDisplay"]!) "
+            scoreText += data.matchInfo[1].matchDetail.matchResult
+            scoreText += " \(data.matchInfo[0].shoot["goalTotalDisplay"]!)"
+            
+            self.scoreLabel.text = scoreText
         }
     }
     
