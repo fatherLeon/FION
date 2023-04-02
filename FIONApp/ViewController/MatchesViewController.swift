@@ -13,7 +13,7 @@ class MatchesViewController: UITableViewController {
     var userName: String = ""
     
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
-    private var matchManager: NetworkManager<MatchObject>? = nil
+    private var matchManager: MatchManager?
     private var matches: [String] = ["63f18d93e982f639cfe3822c"]
     private var matchesData: [MatchObject] = []
 
