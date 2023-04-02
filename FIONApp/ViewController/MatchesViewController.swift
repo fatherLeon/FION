@@ -14,8 +14,6 @@ class MatchesViewController: UITableViewController {
     
     private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
     private var matchManager: MatchManager?
-    private var matches: [String] = ["63f18d93e982f639cfe3822c"]
-    private var matchesData: [MatchObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +56,16 @@ extension MatchesViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchesData.count
+        guard let count = matchManager?.matchesInfo.count else { return 0 }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell,
-              let data = self.matchManager?.matchesInfo[indexPath.row] else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        guard let data = self.matchManager?.matchesInfo[indexPath.row] else {
             return UITableViewCell()
         }
         
