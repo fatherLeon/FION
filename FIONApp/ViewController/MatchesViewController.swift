@@ -66,7 +66,7 @@ extension MatchesViewController {
             return UITableViewCell()
         }
         
-        cell.updateLabelText(data)
+        cell.updateLabelText(data, target: userName)
         
         return cell
     }
