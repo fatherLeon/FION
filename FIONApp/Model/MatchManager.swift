@@ -9,7 +9,7 @@ import Foundation
 
 struct MatchManager {
     private let matchId: [String]
-    private var networkManager: [NetworkManager<MatchObject>] = []
+    private var networkManagers: [NetworkManager<MatchObject>] = []
     var matchesInfo: [MatchObject] = []
     
     init(matchId: [String]) {
@@ -18,7 +18,7 @@ struct MatchManager {
         matchId.forEach { id in
             let manager = NetworkManager<MatchObject>(type: .match(matchid: id))
             
-            networkManager.append(manager)
+            networkManagers.append(manager)
         }
     }
     
