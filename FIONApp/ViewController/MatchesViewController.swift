@@ -31,7 +31,9 @@ class MatchesViewController: UITableViewController {
     }
     
     @objc private func reloadTableView() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func fetchUserMatches() {
@@ -41,6 +43,7 @@ class MatchesViewController: UITableViewController {
             switch result {
             case .success(let data):
                 self?.matchManager = MatchManager(matchIds: data.matchIds)
+                self?.matchManager?.fetchMatchInfo()
             case .failure(let error):
                 print(error)
             }
@@ -59,11 +62,12 @@ extension MatchesViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell,
+              let data = self.matchManager?.matchesInfo[indexPath.row] else {
             return UITableViewCell()
         }
         
-        cell.updateLabelText(self.matchesData[indexPath.row])
+        cell.updateLabelText(data)
         
         return cell
     }
