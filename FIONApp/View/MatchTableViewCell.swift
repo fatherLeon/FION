@@ -64,10 +64,16 @@ class MatchTableViewCell: UITableViewCell {
         configureUI()
     }
     
-    func updateLabelText(_ data: MatchObject) {
-        self.myNicknameLabel.text = data.matchInfo[0].nickname
-        self.enemyNicknameLabel.text = data.matchInfo[1].nickname
-        self.scoreLabel.text = data.matchInfo[0].matchDetail.matchResult
+    func updateLabelText(_ data: MatchObject, target: String) {
+        if data.matchInfo[0].nickname == target {
+            self.myNicknameLabel.text = data.matchInfo[0].nickname
+            self.enemyNicknameLabel.text = data.matchInfo[1].nickname
+            self.scoreLabel.text = data.matchInfo[0].matchDetail.matchResult
+        } else {
+            self.myNicknameLabel.text = data.matchInfo[1].nickname
+            self.enemyNicknameLabel.text = data.matchInfo[0].nickname
+            self.scoreLabel.text = data.matchInfo[1].matchDetail.matchResult
+        }
     }
     
     // MARK: - UI
