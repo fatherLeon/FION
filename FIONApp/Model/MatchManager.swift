@@ -8,8 +8,16 @@
 import Foundation
 
 struct MatchManager {
-    let matchId: [String]
-    let networkManager: NetworkManager<MatchObject>
+    private let matchId: [String]
+    private var networkManager: [NetworkManager<MatchObject>] = []
     
-    
+    init(matchId: [String]) {
+        self.matchId = matchId
+        
+        matchId.forEach { id in
+            let manager = NetworkManager<MatchObject>(type: .match(matchid: id))
+            
+            networkManager.append(manager)
+        }
+    }
 }
