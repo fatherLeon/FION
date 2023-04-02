@@ -27,7 +27,6 @@ class MatchManager {
             manager.fetchDataByJson { [weak self] result in
                 switch result {
                 case .success(let data):
-                    print(data.matchDate)
                     self?.matchesInfo.append(data)
                     NotificationCenter.default.post(name: .matchesInfo, object: nil)
                 case .failure(let error):
