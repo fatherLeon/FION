@@ -34,7 +34,7 @@ class MatchesViewController: UITableViewController {
         userMatchesManager?.fetchDataByJson(handler: { [weak self] result in
             switch result {
             case .success(let data):
-                self?.matches = data.matchIds
+                self?.matchManager = MatchManager(matchIds: data.matchIds)
             case .failure(let error):
                 print(error)
             }

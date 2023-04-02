@@ -12,10 +12,10 @@ class MatchManager {
     private var networkManagers: [NetworkManager<MatchObject>] = []
     var matchesInfo: [MatchObject] = []
     
-    init(matchId: [String]) {
-        self.matchId = matchId
+    init(matchIds: [String]) {
+        self.matchId = matchIds
         
-        matchId.forEach { id in
+        matchIds.forEach { id in
             let manager = NetworkManager<MatchObject>(type: .match(matchid: id))
             
             networkManagers.append(manager)
