@@ -20,4 +20,8 @@ struct MatchManager {
             networkManager.append(manager)
         }
     }
+    
+    func fetchMatchInfo() {
+        
+    }
 }
