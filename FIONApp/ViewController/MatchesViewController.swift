@@ -25,8 +25,7 @@ class MatchesViewController: UITableViewController {
         
         tableView.register(MatchTableViewCell.self, forCellReuseIdentifier: MatchTableViewCell.identifier)
         
-//        fetchUserMatches()
-        fetchMatchInfo()
+        fetchUserMatches()
     }
     
     func fetchUserMatches() {
@@ -36,23 +35,6 @@ class MatchesViewController: UITableViewController {
             switch result {
             case .success(let data):
                 self?.matches = data.matchIds
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
-    
-    func fetchMatchInfo() {
-        matchManager = NetworkManager(session: .shared, type: .match(matchid: self.matches[0]))
-        
-        matchManager?.fetchDataByJson(handler: { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.matchesData.append(data)
-                
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
             case .failure(let error):
                 print(error)
             }
