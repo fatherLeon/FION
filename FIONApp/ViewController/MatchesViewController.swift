@@ -35,7 +35,7 @@ class MatchesViewController: UITableViewController {
     }
     
     func fetchUserMatches() {
-        userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 5))
+        userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 20))
         
         userMatchesManager?.fetchDataByJson(handler: { [weak self] result in
             switch result {
@@ -61,11 +61,8 @@ extension MatchesViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        guard let data = self.matchManager?.matchesInfo[indexPath.row] else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.identifier, for: indexPath) as? MatchTableViewCell,
+              let data = self.matchManager?.matchesInfo[indexPath.row] else {
             return UITableViewCell()
         }
         
