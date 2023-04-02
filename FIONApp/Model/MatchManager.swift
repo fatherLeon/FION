@@ -28,6 +28,7 @@ class MatchManager {
                 switch result {
                 case .success(let data):
                     self?.matchesInfo.append(data)
+                    NotificationCenter.default.post(name: .matchesInfo, object: nil)
                 case .failure(let error):
                     print(error)
                 }
