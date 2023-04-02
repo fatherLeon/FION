@@ -8,5 +8,8 @@
 import Foundation
 
 struct MatchManager {
+    let matchId: [String]
+    let networkManager: NetworkManager<MatchObject>
+    
     
 }
