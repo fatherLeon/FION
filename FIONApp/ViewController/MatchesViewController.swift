@@ -48,7 +48,6 @@ class MatchesViewController: UITableViewController {
         matchManager?.fetchDataByJson(handler: { [weak self] result in
             switch result {
             case .success(let data):
-                print(data)
                 self?.matchesData.append(data)
                 
                 DispatchQueue.main.async {
