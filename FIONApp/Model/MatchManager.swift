@@ -10,6 +10,7 @@ import Foundation
 struct MatchManager {
     private let matchId: [String]
     private var networkManager: [NetworkManager<MatchObject>] = []
+    var matchesInfo: [MatchObject] = []
     
     init(matchId: [String]) {
         self.matchId = matchId
