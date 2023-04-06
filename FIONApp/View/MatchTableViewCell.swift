@@ -111,29 +111,39 @@ class MatchTableViewCell: UITableViewCell {
 extension MatchTableViewCell {
     private func configureUI() {
         configureMainStackView()
+        configureDateStackView()
         configureMatchInfoStackView()
     }
     
-    private func configureMainStackView() {
+    private func configureMatchInfoStackView() {
         matchInfoStackView = UIStackView(arrangedSubviews: [scoreLabel, enemyNicknameLabel, possessionLabel])
         
         matchInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         matchInfoStackView.spacing = 2
         matchInfoStackView.distribution = .fillEqually
         
-        self.contentView.addSubview(matchInfoStackView)
+        self.mainStackView.addArrangedSubview(matchInfoStackView)
+        
+    }
+    
+    private func configureMainStackView() {
+        mainStackView.axis = .vertical
+        mainStackView.spacing = 4
+        mainStackView.alignment = .center
+        
+        self.contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            matchInfoStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            matchInfoStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
-            matchInfoStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
+            mainStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            mainStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
             
-            matchInfoStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
-            matchInfoStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30)
+            mainStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
+            mainStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30)
         ])
     }
     
-    private func configureMatchInfoStackView() {
+    private func configureDateStackView() {
         dateStackView = UIStackView(arrangedSubviews: [dateLabel])
         
         dateStackView.translatesAutoresizingMaskIntoConstraints = false
