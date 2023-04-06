@@ -8,10 +8,16 @@
 import Foundation
 
 extension Date {
-    static let matchDateFormatter = {
+    static let ISOFormatter = {
+        let dateFormatter = ISO8601DateFormatter()
+        
+        return dateFormatter
+    }()
+    
+    static let matchListDateFormatter = {
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "MM-dd HH:mm"
         
         return dateFormatter
     }()
