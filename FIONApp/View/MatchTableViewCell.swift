@@ -57,6 +57,7 @@ class MatchTableViewCell: UITableViewCell {
     
     private var mainStackView = UIStackView()
     private var matchInfoStackView = UIStackView()
+    private var dateStackView = UIStackView()
     
     required init?(coder: NSCoder) {
         fatalError("잘못된 접근입니다.")
@@ -114,32 +115,32 @@ extension MatchTableViewCell {
     }
     
     private func configureMainStackView() {
-        mainStackView = UIStackView(arrangedSubviews: [scoreLabel, enemyNicknameLabel])
+        matchInfoStackView = UIStackView(arrangedSubviews: [scoreLabel, enemyNicknameLabel, possessionLabel])
         
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        mainStackView.spacing = 6
-        mainStackView.distribution = .fillEqually
+        matchInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        matchInfoStackView.spacing = 2
+        matchInfoStackView.distribution = .fillEqually
         
-        self.contentView.addSubview(mainStackView)
+        self.contentView.addSubview(matchInfoStackView)
         
         NSLayoutConstraint.activate([
-            mainStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
-            mainStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
+            matchInfoStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            matchInfoStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
+            matchInfoStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
             
-            mainStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
-            mainStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30)
+            matchInfoStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
+            matchInfoStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30)
         ])
     }
     
     private func configureMatchInfoStackView() {
-        matchInfoStackView = UIStackView(arrangedSubviews: [dateLabel, possessionLabel])
+        dateStackView = UIStackView(arrangedSubviews: [dateLabel])
         
-        matchInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-        matchInfoStackView.spacing = 4
-        matchInfoStackView.alignment = .center
-        matchInfoStackView.axis = .vertical
+        dateStackView.translatesAutoresizingMaskIntoConstraints = false
+        dateStackView.spacing = 4
+        dateStackView.alignment = .center
+        dateStackView.axis = .horizontal
         
-        self.mainStackView.addArrangedSubview(matchInfoStackView)
+        self.matchInfoStackView.addArrangedSubview(dateStackView)
     }
 }
