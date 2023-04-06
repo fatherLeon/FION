@@ -92,8 +92,6 @@ class MatchTableViewCell: UITableViewCell {
             self.dateLabel.text = data.matchDate
             self.possessionLabel.text = "\(data.matchInfo[1].matchDetail.possession)% vs \(data.matchInfo[0].matchDetail.possession)%"
         }
-        
-        
     }
 }
 

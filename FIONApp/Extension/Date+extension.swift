@@ -11,7 +11,7 @@ extension Date {
     static let matchDateFormatter = {
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "MM-dd, HH:mm"
         
         return dateFormatter
     }()
