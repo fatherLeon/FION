@@ -27,7 +27,7 @@ class MatchTableViewCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textAlignment = .center
         
         return label
@@ -38,7 +38,7 @@ class MatchTableViewCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         
         return label
@@ -127,9 +127,9 @@ extension MatchTableViewCell {
     }
     
     private func configureMainStackView() {
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
-        mainStackView.spacing = 4
-        mainStackView.alignment = .center
+        mainStackView.spacing = 20
         
         self.contentView.addSubview(mainStackView)
         
@@ -151,6 +151,6 @@ extension MatchTableViewCell {
         dateStackView.alignment = .center
         dateStackView.axis = .horizontal
         
-        self.matchInfoStackView.addArrangedSubview(dateStackView)
+        self.mainStackView.addArrangedSubview(dateStackView)
     }
 }
