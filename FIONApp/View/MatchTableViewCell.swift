@@ -78,7 +78,7 @@ class MatchTableViewCell: UITableViewCell {
             scoreText += " \(data.matchInfo[1].shoot["goalTotalDisplay"]!)"
             
             self.scoreLabel.text = scoreText
-            self.dateLabel.text = data.matchDate
+            self.dateLabel.text = convertStringToFormattedString(data.matchDate)
             self.possessionLabel.text = "\(data.matchInfo[0].matchDetail.possession)% vs \(data.matchInfo[1].matchDetail.possession)%"
         } else {
             self.enemyNicknameLabel.text = data.matchInfo[0].nickname
@@ -89,9 +89,19 @@ class MatchTableViewCell: UITableViewCell {
             scoreText += " \(data.matchInfo[0].shoot["goalTotalDisplay"]!)"
             
             self.scoreLabel.text = scoreText
-            self.dateLabel.text = data.matchDate
+            self.dateLabel.text = convertStringToFormattedString(data.matchDate)
             self.possessionLabel.text = "\(data.matchInfo[1].matchDetail.possession)% vs \(data.matchInfo[0].matchDetail.possession)%"
         }
+    }
+    
+    func convertStringToFormattedString(_ dateText: String) -> String {
+        let dateFormatter = Date.matchDateFormatter
+        
+        guard let formattedDate = dateFormatter.date(from: dateText) else {
+            return "날짜 정보 없음"
+        }
+        
+        return dateFormatter.string(from: formattedDate)
     }
 }
 
