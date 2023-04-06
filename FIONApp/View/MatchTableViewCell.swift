@@ -95,13 +95,14 @@ class MatchTableViewCell: UITableViewCell {
     }
     
     func convertStringToFormattedString(_ dateText: String) -> String {
-        let dateFormatter = Date.matchDateFormatter
+        let basicDateFormatter = Date.ISOFormatter
+        let matchListDateFormatter = Date.matchListDateFormatter
         
-        guard let formattedDate = dateFormatter.date(from: dateText) else {
+        guard let formattedDate = basicDateFormatter.date(from: dateText + "Z") else {
             return "날짜 정보 없음"
         }
         
-        return dateFormatter.string(from: formattedDate)
+        return matchListDateFormatter.string(from: formattedDate)
     }
 }
 
