@@ -33,16 +33,6 @@ class MatchTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var mainStackView = {
-        let stackView = UIStackView(arrangedSubviews: [scoreLabel, enemyNicknameLabel])
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 6
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
     required init?(coder: NSCoder) {
         fatalError("잘못된 접근입니다.")
     }
@@ -75,8 +65,17 @@ class MatchTableViewCell: UITableViewCell {
         }
     }
     
-    // MARK: - UI
+}
+
+// MARK: - UI
+extension MatchTableViewCell {
     private func configureUI() {
+        let mainStackView = UIStackView(arrangedSubviews: [scoreLabel, enemyNicknameLabel])
+        
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.spacing = 6
+        mainStackView.distribution = .fillEqually
+        
         self.contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
