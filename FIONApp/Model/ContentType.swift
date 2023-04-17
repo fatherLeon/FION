@@ -24,6 +24,10 @@ enum ContentType {
         return "api.nexon.co.kr"
     }
     
+    private var path: String {
+        return "/fifaonline4/v1.0"
+    }
+    
     var url: URL? {
         switch self {
         case .userInfo(let nickname):
