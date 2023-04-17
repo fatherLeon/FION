@@ -62,21 +62,7 @@ enum ContentType {
         urlComponents.scheme = self.scheme
         urlComponents.host = self.host
         urlComponents.path = self.path
-        
-        switch self {
-        case .userInfo(let nickname):
-            let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
-
-            urlComponents.queryItems = [nicknameQuery]
-        case .userMatch(let id, let matchType, let offset, let limit):
-            let matchTypeQuery = URLQueryItem(name: "matchtype", value: "\(matchType)")
-            let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
-            let limitQuery = URLQueryItem(name: "limit", value: "\(limit)")
-            
-            urlComponents.queryItems = [matchTypeQuery, offsetQuery, limitQuery]
-        case .match(let matchid):
-            return urlComponents.url
-        }
+        urlComponents.queryItems = self.querys
         
         return urlComponents.url
     }
