@@ -39,7 +39,7 @@ enum ContentType {
         return basicPath
     }
     
-    private var querys: [URLQueryItem] {
+    private var querys: [URLQueryItem]? {
         switch self {
         case .userInfo(let nickname):
             let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
@@ -52,7 +52,7 @@ enum ContentType {
             
             return [matchTypeQuery, offsetQuery, limitQuery]
         case .match(_):
-            return []
+            return nil
         }
     }
     
