@@ -18,6 +18,9 @@ class MockURLProtocol: URLProtocol {
         return request
     }
     
+    override func stopLoading() {
+    }
+    
     override func startLoading() {
         guard let handler = MockURLProtocol.requestHandler else { return }
         
