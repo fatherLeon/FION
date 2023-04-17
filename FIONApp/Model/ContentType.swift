@@ -20,6 +20,10 @@ enum ContentType {
         return "https"
     }
     
+    private var host: String {
+        return "api.nexon.co.kr"
+    }
+    
     var url: URL? {
         switch self {
         case .userInfo(let nickname):
