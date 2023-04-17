@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct NetworkManager<T> {
+struct NetworkManager {
     private let type: ContentType
     private let networkModel: APIProvider
     
@@ -16,7 +16,7 @@ struct NetworkManager<T> {
         self.type = type
     }
     
-    func fetchDataByJson(handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
+    func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         guard let request = networkModel.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
@@ -25,7 +25,7 @@ struct NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                guard let decodingData = Decoder().decodeToJson(type: T.self, by: data) else {
+                guard let decodingData = Decoder().decodeToJson(type: decodingType, by: data) else {
                     handler(.failure(.decodingError))
                     return
                 }
