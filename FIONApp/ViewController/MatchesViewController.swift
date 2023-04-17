@@ -12,7 +12,7 @@ class MatchesViewController: UITableViewController {
     var userID: String = ""
     var userName: String = ""
     
-    private var userMatchesManager: NetworkManager<UserMatchObject>? = nil
+    private var userMatchesManager: NetworkManager? = nil
     private var matchManager: MatchManager?
 
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class MatchesViewController: UITableViewController {
     func fetchUserMatches() {
         userMatchesManager = NetworkManager(type: .userMatch(id: "\(userID)", matchType: 50, limit: 20))
         
-        userMatchesManager?.fetchDataByJson(handler: { [weak self] result in
+        userMatchesManager?.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.matchManager = MatchManager(matchIds: data.matchIds)
@@ -45,7 +45,7 @@ class MatchesViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             }
-        })
+        }
     }
 }
 
