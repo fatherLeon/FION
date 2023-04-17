@@ -8,11 +8,15 @@
 import UIKit
 
 struct NetworkManager {
-    private let type: ContentType
+    private var type: ContentType
     private let networkModel: APIProvider
     
     init(session: URLSession = .shared, type: ContentType) {
         self.networkModel = APIProvider(session: session)
+        self.type = type
+    }
+    
+    mutating func changeContentType(_ type: ContentType) {
         self.type = type
     }
     
