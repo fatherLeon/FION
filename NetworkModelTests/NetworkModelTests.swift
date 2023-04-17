@@ -6,12 +6,16 @@
 //
 
 import XCTest
+@testable import FIONApp
 
 final class NetworkModelTests: XCTestCase {
+    
+    private var sut: NetworkModel!
 
     override func setUpWithError() throws {
     }
 
     override func tearDownWithError() throws {
+        sut = nil
     }
 }
