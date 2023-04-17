@@ -8,5 +8,9 @@
 import Foundation
 
 struct Decoder<T> {
-    
+    func decodeToJson(by data: Data) -> T? where T: Decodable {
+        let decodingData = try? JSONDecoder().decode(T.self, from: data)
+        
+        return decodingData
+    }
 }
