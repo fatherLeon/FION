@@ -43,19 +43,27 @@ final class APIProviderTests: XCTestCase {
         // given
         let contentType = ContentType.match(matchid: "123")
         let request = sut.makeRequest(contentType: contentType)!
+        let expectation = XCTestExpectation()
         
         MockURLProtocol.requestHandler = { (request) in
-            let urlResponse = URLResponse(url: contentType.url!, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+            let urlResponse = HTTPURLResponse(url: contentType.url!, statusCode: 200, httpVersion: "2.0", headerFields: nil)!
             let data = "abc".data(using: .utf8)!
             
             return (urlResponse, data)
         }
         
         // when
-        let task = sut.makeURLSessionDataTask(request: request, completion: { _ in })
-        let resultResponseCode = task!.response as! HTTPURLResponse
+        let task = sut.makeURLSessionDataTask(request: request, completion: { _ in
+            expectation.fulfill()
+        })!
+        
+        task.resume()
         
         // then
+        wait(for: [expectation], timeout: 3)
+        
+        let resultResponseCode = task.response as! HTTPURLResponse
+        
         XCTAssertEqual(resultResponseCode.statusCode, 200)
     }
 }
