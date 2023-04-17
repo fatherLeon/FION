@@ -96,11 +96,8 @@
 		26058CEA29C885FB00DC3EEA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				26E0CD4F29ED4BC400244142 /* Network */,
 				26FC683A29C9D6CB00B398E2 /* DTO */,
-				26FC683829C9D66200B398E2 /* NetworkModel.swift */,
-				26FC683B29C9D6F000B398E2 /* ContentType.swift */,
-				26FC683D29C9DDF700B398E2 /* NetworkError.swift */,
-				261AA83C29D83DB700E0F671 /* NetworkManager.swift */,
 				2604313A29D9508700085876 /* MatchManager.swift */,
 			);
 			path = Model;
@@ -156,6 +153,17 @@
 				26D3562329D870E6003940C2 /* MatchesViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		26E0CD4F29ED4BC400244142 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				26FC683B29C9D6F000B398E2 /* ContentType.swift */,
+				26FC683D29C9DDF700B398E2 /* NetworkError.swift */,
+				261AA83C29D83DB700E0F671 /* NetworkManager.swift */,
+				26FC683829C9D66200B398E2 /* NetworkModel.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		26E8C43329D8301000665180 /* ContentTypeTests */ = {
