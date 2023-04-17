@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct NetworkModel: URLSessionProtocol {
+class NetworkModel: URLSessionProtocol {
     private let session: URLSession
+    
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
     
     private func makeRequest(contentType: ContentType) -> URLRequest? {
         guard let url = contentType.url else { return nil }
