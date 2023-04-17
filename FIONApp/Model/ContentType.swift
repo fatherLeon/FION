@@ -39,6 +39,23 @@ enum ContentType {
         return basicPath
     }
     
+    private var querys: [URLQueryItem] {
+        switch self {
+        case .userInfo(let nickname):
+            let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
+            
+            return [nicknameQuery]
+        case .userMatch(_, let matchType, let offset, let limit):
+            let matchTypeQuery = URLQueryItem(name: "matchtype", value: "\(matchType)")
+            let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
+            let limitQuery = URLQueryItem(name: "limit", value: "\(limit)")
+            
+            return [matchTypeQuery, offsetQuery, limitQuery]
+        case .match(_):
+            return []
+        }
+    }
+    
     var url: URL? {
         var urlComponents = URLComponents()
         
@@ -49,22 +66,16 @@ enum ContentType {
         switch self {
         case .userInfo(let nickname):
             let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
-            
-            urlComponents.path.append("/users")
+
             urlComponents.queryItems = [nicknameQuery]
         case .userMatch(let id, let matchType, let offset, let limit):
             let matchTypeQuery = URLQueryItem(name: "matchtype", value: "\(matchType)")
             let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
             let limitQuery = URLQueryItem(name: "limit", value: "\(limit)")
             
-            urlComponents.path.append("/users")
-            urlComponents.path.append("/\(id)")
-            urlComponents.path.append("/matches")
-            
             urlComponents.queryItems = [matchTypeQuery, offsetQuery, limitQuery]
         case .match(let matchid):
-            urlComponents.path.append("/matches")
-            urlComponents.path.append("/\(matchid)")
+            return urlComponents.url
         }
         
         return urlComponents.url
