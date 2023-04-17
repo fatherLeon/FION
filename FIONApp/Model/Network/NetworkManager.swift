@@ -7,25 +7,29 @@
 
 import UIKit
 
-final class NetworkManager<T> {
-    private let type: ContentType
-    private let networkModel: NetworkModel
+struct NetworkManager {
+    private var type: ContentType
+    private let networkModel: APIProvider
     
     init(session: URLSession = .shared, type: ContentType) {
-        self.networkModel = NetworkModel(session: session)
+        self.networkModel = APIProvider(session: session)
         self.type = type
     }
     
-    func fetchDataByJson(handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
+    mutating func changeContentType(_ type: ContentType) {
+        self.type = type
+    }
+    
+    func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         guard let request = networkModel.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
         }
         
-        let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
+        let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                guard let decodingData = self?.decodingToJson(data: data) else {
+                guard let decodingData = DecoderModel().decodeToJson(type: decodingType, by: data) else {
                     handler(.failure(.decodingError))
                     return
                 }
@@ -36,7 +40,7 @@ final class NetworkManager<T> {
             }
         }
         
-        task.resume()
+        task?.resume()
     }
     
     func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
@@ -48,22 +52,13 @@ final class NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                let image = UIImage(data: data)
+                let image = DecoderModel().decodeToImage(by: data)
                 handler(.success(image))
             case .failure(let error):
                 handler(.failure(error))
             }
         }
         
-        task.resume()
-    }
-    
-    private func decodingToJson(data: Data) -> T? where T: Decodable{
-        do {
-            let decodingData = try JSONDecoder().decode(T.self, from: data)
-            return decodingData
-        } catch {
-            return nil
-        }
+        task?.resume()
     }
 }
