@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Decoder {
+struct DecoderModel {
     func decodeToJson<T>(type: T.Type, by data: Data) -> T? where T: Decodable {
         let decodingData = try? JSONDecoder().decode(type, from: data)
         

@@ -29,7 +29,7 @@ struct NetworkManager {
         let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                guard let decodingData = Decoder().decodeToJson(type: decodingType, by: data) else {
+                guard let decodingData = DecoderModel().decodeToJson(type: decodingType, by: data) else {
                     handler(.failure(.decodingError))
                     return
                 }
@@ -52,7 +52,7 @@ struct NetworkManager {
         let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                let image = Decoder().decodeToImage(by: data)
+                let image = DecoderModel().decodeToImage(by: data)
                 handler(.success(image))
             case .failure(let error):
                 handler(.failure(error))
