@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private var userNetworkManager: NetworkManager<UserInfoObject>? = nil
+    private var userNetworkManager: NetworkManager? = nil
     
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
         
         userNetworkManager = NetworkManager(type: ContentType.userInfo(nickname: nickname))
         
-        userNetworkManager?.fetchDataByJson { [weak self] result in
+        userNetworkManager?.fetchDataByJson(to: UserInfoObject.self) { [weak self] result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
