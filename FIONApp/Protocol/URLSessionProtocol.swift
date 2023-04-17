@@ -9,5 +9,5 @@ import Foundation
 
 protocol URLSessionProtocol {
     func makeRequest(contentType: ContentType) -> URLRequest?
-    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask
+    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask?
 }

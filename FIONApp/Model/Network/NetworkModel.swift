@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct NetworkModel {
-    let session: URLSession
+struct NetworkModel: URLSessionProtocol {
+    private let session: URLSession
     
-    func makeRequest(contentType: ContentType) -> URLRequest? {
+    private func makeRequest(contentType: ContentType) -> URLRequest? {
         guard let url = contentType.url else { return nil }
         
         var request = URLRequest(url: url)
@@ -21,7 +21,7 @@ struct NetworkModel {
         return request
     }
     
-    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask {
+    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask? {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil,
                   let httpResponse = response as? HTTPURLResponse else {
