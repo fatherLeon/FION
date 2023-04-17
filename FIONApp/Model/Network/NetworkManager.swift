@@ -57,13 +57,4 @@ final class NetworkManager<T> {
         
         task?.resume()
     }
-    
-    private func decodingToJson(data: Data) -> T? where T: Decodable{
-        do {
-            let decodingData = try JSONDecoder().decode(T.self, from: data)
-            return decodingData
-        } catch {
-            return nil
-        }
-    }
 }
