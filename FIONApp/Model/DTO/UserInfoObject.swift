@@ -7,14 +7,13 @@
 
 import Foundation
 
-// https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={nickname}
-struct UserInfo: Decodable {
+struct UserInfoObject: Decodable {
     let userId: String
     let name: String
     let level: Int
     
     enum CodingKeys: String, CodingKey {
-        case userId = "accessid"
+        case userId = "accessId"
         case name = "nickname"
         case level
     }
