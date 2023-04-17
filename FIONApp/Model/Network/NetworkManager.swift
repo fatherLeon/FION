@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NetworkManager<T> {
+struct NetworkManager<T> {
     private let type: ContentType
     private let networkModel: APIProvider
     
@@ -22,10 +22,10 @@ final class NetworkManager<T> {
             return
         }
         
-        let task = networkModel.makeURLSessionDataTask(request: request) { [weak self] result in
+        let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                guard let decodingData = self?.decodingToJson(data: data) else {
+                guard let decodingData = Decoder().decodeToJson(type: T.self, by: data) else {
                     handler(.failure(.decodingError))
                     return
                 }
@@ -48,7 +48,7 @@ final class NetworkManager<T> {
         let task = networkModel.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
-                let image = UIImage(data: data)
+                let image = Decoder().decodeToImage(by: data)
                 handler(.success(image))
             case .failure(let error):
                 handler(.failure(error))
