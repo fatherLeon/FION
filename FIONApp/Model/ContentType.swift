@@ -16,6 +16,10 @@ enum ContentType {
         return URL(string: "https://api.nexon.co.kr/fifaonline4/v1.0/")
     }
     
+    private var scheme: String {
+        return "https"
+    }
+    
     var url: URL? {
         switch self {
         case .userInfo(let nickname):
