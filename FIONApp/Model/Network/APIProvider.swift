@@ -26,7 +26,7 @@ struct APIProvider {
     }
     
     func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask? {
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             guard error == nil,
                   let httpResponse = response as? HTTPURLResponse else {
                 completion(.failure(.networkError))
