@@ -40,7 +40,7 @@ enum ContentType {
             let nicknameQuery = URLQueryItem(name: "nickname", value: nickname)
             
             urlComponents.path.append("/users")
-            urlComponents.queryItems?.append(nicknameQuery)
+            urlComponents.queryItems = [nicknameQuery]
         case .userMatch(let id, let matchType, let offset, let limit):
             let matchTypeQuery = URLQueryItem(name: "matchtype", value: "\(matchType)")
             let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
