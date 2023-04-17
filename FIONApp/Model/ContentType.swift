@@ -25,7 +25,18 @@ enum ContentType {
     }
     
     private var path: String {
-        return "/fifaonline4/v1.0"
+        var basicPath = "/fifaonline4/v1.0"
+        
+        switch self {
+        case .userInfo(_):
+            basicPath.append("/users")
+        case .userMatch(let id, _, _, _):
+            basicPath.append("/users/\(id)/matches")
+        case .match(let matchid):
+            basicPath.append("/matches/\(matchid)")
+        }
+        
+        return basicPath
     }
     
     var url: URL? {
