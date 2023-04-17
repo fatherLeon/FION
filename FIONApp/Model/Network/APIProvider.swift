@@ -1,5 +1,5 @@
 //
-//  NetworkModel.swift
+//  APIProvider.swift
 //  FIONApp
 //
 //  Created by 강민수 on 2023/03/21.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-class NetworkModel: URLSessionProtocol {
+struct APIProvider {
     private let session: URLSession
     
     init(session: URLSession = .shared) {
         self.session = session
     }
     
-    private func makeRequest(contentType: ContentType) -> URLRequest? {
+    func makeRequest(contentType: ContentType) -> URLRequest? {
         guard let url = contentType.url else { return nil }
         
         var request = URLRequest(url: url)
