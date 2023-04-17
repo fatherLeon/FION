@@ -1,5 +1,5 @@
 //
-//  NetworkModel.swift
+//  APIProvider.swift
 //  FIONApp
 //
 //  Created by 강민수 on 2023/03/21.
@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct NetworkModel {
-    let session: URLSession
+struct APIProvider {
+    private let session: URLSession
+    
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
     
     func makeRequest(contentType: ContentType) -> URLRequest? {
         guard let url = contentType.url else { return nil }
@@ -21,7 +25,7 @@ struct NetworkModel {
         return request
     }
     
-    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask {
+    func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, NetworkError>) -> Void)) -> URLSessionDataTask? {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil,
                   let httpResponse = response as? HTTPURLResponse else {

@@ -9,10 +9,10 @@ import UIKit
 
 final class NetworkManager<T> {
     private let type: ContentType
-    private let networkModel: NetworkModel
+    private let networkModel: APIProvider
     
     init(session: URLSession = .shared, type: ContentType) {
-        self.networkModel = NetworkModel(session: session)
+        self.networkModel = APIProvider(session: session)
         self.type = type
     }
     
@@ -36,7 +36,7 @@ final class NetworkManager<T> {
             }
         }
         
-        task.resume()
+        task?.resume()
     }
     
     func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
@@ -55,7 +55,7 @@ final class NetworkManager<T> {
             }
         }
         
-        task.resume()
+        task?.resume()
     }
     
     private func decodingToJson(data: Data) -> T? where T: Decodable{
