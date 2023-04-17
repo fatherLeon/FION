@@ -23,6 +23,7 @@
 		26AD318129B3B1A4001E8BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26AD318029B3B1A4001E8BE4 /* Assets.xcassets */; };
 		26AD318429B3B1A4001E8BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AD318229B3B1A4001E8BE4 /* LaunchScreen.storyboard */; };
 		26D3562429D870E6003940C2 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3562329D870E6003940C2 /* MatchesViewController.swift */; };
+		26DD02F629ED4D280093C12D /* NetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DD02F529ED4D280093C12D /* NetworkModelTests.swift */; };
 		26E8C43529D8301000665180 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E8C43429D8301000665180 /* ContentTypeTests.swift */; };
 		26FC683929C9D66200B398E2 /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC683829C9D66200B398E2 /* NetworkModel.swift */; };
 		26FC683C29C9D6F000B398E2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC683B29C9D6F000B398E2 /* ContentType.swift */; };
@@ -30,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		26DD02F729ED4D280093C12D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26AD316C29B3B1A4001E8BE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 26AD317329B3B1A4001E8BE4;
+			remoteInfo = FIONApp;
+		};
 		26E8C43629D8301000665180 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26AD316C29B3B1A4001E8BE4 /* Project object */;
@@ -58,6 +66,8 @@
 		26AD318329B3B1A4001E8BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26AD318529B3B1A4001E8BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26D3562329D870E6003940C2 /* MatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		26DD02F329ED4D280093C12D /* NetworkModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		26DD02F529ED4D280093C12D /* NetworkModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModelTests.swift; sourceTree = "<group>"; };
 		26E8C43229D8301000665180 /* ContentTypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContentTypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E8C43429D8301000665180 /* ContentTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTypeTests.swift; sourceTree = "<group>"; };
 		26FC683829C9D66200B398E2 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
@@ -67,6 +77,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		26AD317129B3B1A4001E8BE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26DD02F029ED4D280093C12D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -116,6 +133,7 @@
 			children = (
 				26AD317629B3B1A4001E8BE4 /* FIONApp */,
 				26E8C43329D8301000665180 /* ContentTypeTests */,
+				26DD02F429ED4D280093C12D /* NetworkModelTests */,
 				26AD317529B3B1A4001E8BE4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,6 +143,7 @@
 			children = (
 				26AD317429B3B1A4001E8BE4 /* FIONApp.app */,
 				26E8C43229D8301000665180 /* ContentTypeTests.xctest */,
+				26DD02F329ED4D280093C12D /* NetworkModelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +172,14 @@
 				26D3562329D870E6003940C2 /* MatchesViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		26DD02F429ED4D280093C12D /* NetworkModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				26DD02F529ED4D280093C12D /* NetworkModelTests.swift */,
+			);
+			path = NetworkModelTests;
 			sourceTree = "<group>";
 		};
 		26E0CD4F29ED4BC400244142 /* Network */ = {
@@ -204,6 +231,24 @@
 			productReference = 26AD317429B3B1A4001E8BE4 /* FIONApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		26DD02F229ED4D280093C12D /* NetworkModelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26DD02FB29ED4D280093C12D /* Build configuration list for PBXNativeTarget "NetworkModelTests" */;
+			buildPhases = (
+				26DD02EF29ED4D280093C12D /* Sources */,
+				26DD02F029ED4D280093C12D /* Frameworks */,
+				26DD02F129ED4D280093C12D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				26DD02F829ED4D280093C12D /* PBXTargetDependency */,
+			);
+			name = NetworkModelTests;
+			productName = NetworkModelTests;
+			productReference = 26DD02F329ED4D280093C12D /* NetworkModelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		26E8C43129D8301000665180 /* ContentTypeTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26E8C43A29D8301000665180 /* Build configuration list for PBXNativeTarget "ContentTypeTests" */;
@@ -229,11 +274,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					26AD317329B3B1A4001E8BE4 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					26DD02F229ED4D280093C12D = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 26AD317329B3B1A4001E8BE4;
 					};
 					26E8C43129D8301000665180 = {
 						CreatedOnToolsVersion = 14.2;
@@ -256,6 +305,7 @@
 			targets = (
 				26AD317329B3B1A4001E8BE4 /* FIONApp */,
 				26E8C43129D8301000665180 /* ContentTypeTests */,
+				26DD02F229ED4D280093C12D /* NetworkModelTests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +318,13 @@
 				26AD318429B3B1A4001E8BE4 /* LaunchScreen.storyboard in Resources */,
 				26058CE029C8798700DC3EEA /* APIKey.plist in Resources */,
 				26AD318129B3B1A4001E8BE4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26DD02F129ED4D280093C12D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +361,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26DD02EF29ED4D280093C12D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26DD02F629ED4D280093C12D /* NetworkModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26E8C42E29D8301000665180 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,6 +380,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		26DD02F829ED4D280093C12D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26AD317329B3B1A4001E8BE4 /* FIONApp */;
+			targetProxy = 26DD02F729ED4D280093C12D /* PBXContainerItemProxy */;
+		};
 		26E8C43729D8301000665180 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 26AD317329B3B1A4001E8BE4 /* FIONApp */;
@@ -502,6 +572,50 @@
 			};
 			name = Release;
 		};
+		26DD02F929ED4D280093C12D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 58JZ3489C7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.minsu.NetworkModelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FIONApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FIONApp";
+			};
+			name = Debug;
+		};
+		26DD02FA29ED4D280093C12D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 58JZ3489C7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.minsu.NetworkModelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FIONApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FIONApp";
+			};
+			name = Release;
+		};
 		26E8C43829D8301000665180 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -563,6 +677,15 @@
 			buildConfigurations = (
 				26AD318929B3B1A4001E8BE4 /* Debug */,
 				26AD318A29B3B1A4001E8BE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26DD02FB29ED4D280093C12D /* Build configuration list for PBXNativeTarget "NetworkModelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26DD02F929ED4D280093C12D /* Debug */,
+				26DD02FA29ED4D280093C12D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
