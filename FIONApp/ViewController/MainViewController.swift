@@ -18,9 +18,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = .systemBackground
-        
         configureUI()
     }
     
@@ -67,6 +64,9 @@ extension MainViewController {
     }
     
     private func configureUI() {
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = .systemBackground
+        
         configureLogoImageView()
         configureUserTextField()
         configureSearchButton()
