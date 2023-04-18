@@ -15,6 +15,7 @@
 		26058CE629C8825A00DC3EEA /* UserMatchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE529C8825A00DC3EEA /* UserMatchObject.swift */; };
 		26058CE829C8845900DC3EEA /* MatchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE729C8845900DC3EEA /* MatchObject.swift */; };
 		261AA83D29D83DB700E0F671 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261AA83C29D83DB700E0F671 /* NetworkManager.swift */; };
+		261E699229EEC79C00E77A14 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699129EEC79C00E77A14 /* NetworkManagerTests.swift */; };
 		264CA4FE29EE93670053A559 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E8C43429D8301000665180 /* ContentTypeTests.swift */; };
 		264EDB7E29D8925300EAA0EF /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */; };
 		264EDB8029D8933000EAA0EF /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7F29D8933000EAA0EF /* Date+extension.swift */; };
@@ -51,6 +52,7 @@
 		26058CE529C8825A00DC3EEA /* UserMatchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMatchObject.swift; sourceTree = "<group>"; };
 		26058CE729C8845900DC3EEA /* MatchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchObject.swift; sourceTree = "<group>"; };
 		261AA83C29D83DB700E0F671 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		261E699129EEC79C00E77A14 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		264EDB7F29D8933000EAA0EF /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		266398A429EDDD3A0032033F /* DecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModel.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		264CA4FF29EE93840053A559 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				261E699129EEC79C00E77A14 /* NetworkManagerTests.swift */,
 				26E8C43429D8301000665180 /* ContentTypeTests.swift */,
 				26DD030529ED57390093C12D /* APIProviderTests.swift */,
 			);
@@ -326,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261E699229EEC79C00E77A14 /* NetworkManagerTests.swift in Sources */,
 				264CA4FE29EE93670053A559 /* ContentTypeTests.swift in Sources */,
 				26DD030629ED57390093C12D /* APIProviderTests.swift in Sources */,
 				26DD030D29ED59DA0093C12D /* MockURLProtocol.swift in Sources */,
