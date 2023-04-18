@@ -21,9 +21,7 @@ class MainViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .systemBackground
         
-        configureLogoImageView()
-        configureUserTextField()
-        configureSearchButton()
+        configureUI()
     }
     
     @objc func didTapSearchButton() {
@@ -66,6 +64,12 @@ extension MainViewController {
         alertController.addAction(action)
         
         present(alertController, animated: true)
+    }
+    
+    private func configureUI() {
+        configureLogoImageView()
+        configureUserTextField()
+        configureSearchButton()
     }
     
     private func configureLogoImageView() {
