@@ -11,6 +11,7 @@ enum ContentType {
     case userInfo(nickname: String)
     case userMatch(id: String, matchType: Int, offset: Int = 0, limit: Int = 100)
     case match(matchid: String)
+    case allMatch(matchtype: Int = 50, offset: Int = 0, limit: Int = 100, orderby: String = "desc")
     
     private var baseURL: URL? {
         return URL(string: "https://api.nexon.co.kr/fifaonline4/v1.0/")
@@ -34,6 +35,8 @@ enum ContentType {
             basicPath.append("/users/\(id)/matches")
         case .match(let matchid):
             basicPath.append("/matches/\(matchid)")
+        case .allMatch(_, _, _, _):
+            basicPath.append("/matches")
         }
         
         return basicPath
@@ -53,6 +56,13 @@ enum ContentType {
             return [matchTypeQuery, offsetQuery, limitQuery]
         case .match(_):
             return nil
+        case .allMatch(let matchtype, let offset, let limit, let orderby):
+            let matchtypeQuery = URLQueryItem(name: "matchtype", value: "\(matchtype)")
+            let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
+            let limitQuery = URLQueryItem(name: "limit", value: "\(limit)")
+            let orderbyQuery = URLQueryItem(name: "orderby", value: orderby)
+            
+            return [matchtypeQuery, offsetQuery, limitQuery, orderbyQuery]
         }
     }
     
