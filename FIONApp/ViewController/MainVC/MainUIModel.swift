@@ -47,8 +47,11 @@ final class MainUIModel {
         fetchImages()
     }
     
-    func fetchImages() {
+    
+    private func calculateTopTenUsedPlayer() -> [Int] {
+        let players = playersCounter.sorted { $0.value > $1.value }.map { $0.key }
         
+        return players
     }
     
     private func calculateUsedPlayer(_ players: [Player]) {
