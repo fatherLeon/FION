@@ -11,4 +11,8 @@ final class MainUIModel {
     private var manager: NetworkManager?
     private var userData: UserInfoObject?
     private var playerImages: [UIImage] = []
+    
+    func changeManager(_ manager: NetworkManager) {
+        self.manager = manager
+    }
 }
