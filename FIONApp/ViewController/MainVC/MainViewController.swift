@@ -9,8 +9,6 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private var userNetworkManager: NetworkManager? = nil
-    
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
