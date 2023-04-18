@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIProvider {
+struct APIProvider: Providable {
     private let session: URLSession
     
     init(session: URLSession = .shared) {

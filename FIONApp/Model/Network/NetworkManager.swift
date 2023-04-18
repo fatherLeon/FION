@@ -9,7 +9,7 @@ import UIKit
 
 struct NetworkManager {
     private var type: ContentType
-    private let provider: APIProvider
+    private let provider: Providable
     
     init(session: URLSession = .shared, type: ContentType) {
         self.provider = APIProvider(session: session)
