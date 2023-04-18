@@ -17,6 +17,7 @@
 		261AA83D29D83DB700E0F671 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261AA83C29D83DB700E0F671 /* NetworkManager.swift */; };
 		261E699229EEC79C00E77A14 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699129EEC79C00E77A14 /* NetworkManagerTests.swift */; };
 		261E699529EEC89F00E77A14 /* Providable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699429EEC89F00E77A14 /* Providable.swift */; };
+		261E699729EECC9D00E77A14 /* MockAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699629EECC9D00E77A14 /* MockAPIProvider.swift */; };
 		264CA4FE29EE93670053A559 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E8C43429D8301000665180 /* ContentTypeTests.swift */; };
 		264EDB7E29D8925300EAA0EF /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */; };
 		264EDB8029D8933000EAA0EF /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7F29D8933000EAA0EF /* Date+extension.swift */; };
@@ -55,6 +56,7 @@
 		261AA83C29D83DB700E0F671 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		261E699129EEC79C00E77A14 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		261E699429EEC89F00E77A14 /* Providable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providable.swift; sourceTree = "<group>"; };
+		261E699629EECC9D00E77A14 /* MockAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIProvider.swift; sourceTree = "<group>"; };
 		264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		264EDB7F29D8933000EAA0EF /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		266398A429EDDD3A0032033F /* DecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModel.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				264CA4FF29EE93840053A559 /* Tests */,
 				26DD030C29ED59DA0093C12D /* MockURLProtocol.swift */,
+				261E699629EECC9D00E77A14 /* MockAPIProvider.swift */,
 			);
 			path = NetworkTests;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261E699729EECC9D00E77A14 /* MockAPIProvider.swift in Sources */,
 				261E699229EEC79C00E77A14 /* NetworkManagerTests.swift in Sources */,
 				264CA4FE29EE93670053A559 /* ContentTypeTests.swift in Sources */,
 				26DD030629ED57390093C12D /* APIProviderTests.swift in Sources */,
