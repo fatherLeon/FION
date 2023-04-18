@@ -52,4 +52,32 @@ final class NetworkManagerTests: XCTestCase {
         // then
         wait(for: [expectation], timeout: 3)
     }
+    
+    func test_fetchImage() {
+        // given
+        let url = contentType.url!
+        let request = URLRequest(url: url)
+        let expectation = XCTestExpectation()
+        
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "2.0", headerFields: nil)!
+            let data = StubData.imageData
+            
+            return (response, data)
+        }
+        
+        // when
+        sut.fetchDataByImage { event in
+            switch event {
+            case .success(let image):
+                XCTAssertEqual(image!, UIImage(data: StubData.imageData)!)
+                expectation.fulfill()
+            case .failure(_):
+                XCTFail("Incorrect Test Case")
+            }
+        }
+        
+        // then
+        wait(for: [expectation], timeout: 3)
+    }
 }
