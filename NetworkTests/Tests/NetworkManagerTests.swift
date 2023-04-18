@@ -6,8 +6,19 @@
 //
 
 import XCTest
+@testable import FIONApp
 
 final class NetworkManagerTests: XCTestCase {
+    
+    struct MockAPIProvider: Providable {
+        func makeRequest(contentType: FIONApp.ContentType) -> URLRequest? {
+
+        }
+        
+        func makeURLSessionDataTask(request: URLRequest, completion: @escaping ((Result<Data, FIONApp.NetworkError>) -> Void)) -> URLSessionDataTask? {
+
+        }
+    }
 
     override func setUpWithError() throws {
     }
