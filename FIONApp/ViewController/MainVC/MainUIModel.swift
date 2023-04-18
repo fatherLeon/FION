@@ -8,7 +8,6 @@
 import UIKit
 
 final class MainUIModel {
-    private var userData: UserInfoObject?
     private var playerImages: [UIImage] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
