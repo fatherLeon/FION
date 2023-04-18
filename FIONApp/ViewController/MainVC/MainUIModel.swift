@@ -5,4 +5,10 @@
 //  Created by 강민수 on 2023/04/18.
 //
 
-import Foundation
+import UIKit
+
+final class MainUIModel {
+    private var manager: NetworkManager?
+    private var userData: UserInfoObject?
+    private var playerImages: [UIImage] = []
+}
