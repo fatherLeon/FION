@@ -19,6 +19,7 @@
 		261E699529EEC89F00E77A14 /* Providable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699429EEC89F00E77A14 /* Providable.swift */; };
 		261E699729EECC9D00E77A14 /* MockAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699629EECC9D00E77A14 /* MockAPIProvider.swift */; };
 		261E699929EECFAD00E77A14 /* StubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699829EECFAD00E77A14 /* StubData.swift */; };
+		261E699B29EEE0C500E77A14 /* MainUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E699A29EEE0C500E77A14 /* MainUIModel.swift */; };
 		264CA4FE29EE93670053A559 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E8C43429D8301000665180 /* ContentTypeTests.swift */; };
 		264EDB7E29D8925300EAA0EF /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */; };
 		264EDB8029D8933000EAA0EF /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EDB7F29D8933000EAA0EF /* Date+extension.swift */; };
@@ -59,6 +60,7 @@
 		261E699429EEC89F00E77A14 /* Providable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providable.swift; sourceTree = "<group>"; };
 		261E699629EECC9D00E77A14 /* MockAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIProvider.swift; sourceTree = "<group>"; };
 		261E699829EECFAD00E77A14 /* StubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubData.swift; sourceTree = "<group>"; };
+		261E699A29EEE0C500E77A14 /* MainUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIModel.swift; sourceTree = "<group>"; };
 		264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		264EDB7F29D8933000EAA0EF /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		266398A429EDDD3A0032033F /* DecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModel.swift; sourceTree = "<group>"; };
@@ -113,7 +115,6 @@
 				261E699329EEC89300E77A14 /* Protocol */,
 				26E0CD4F29ED4BC400244142 /* Network */,
 				26FC683A29C9D6CB00B398E2 /* DTO */,
-				2604313A29D9508700085876 /* MatchManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +125,24 @@
 				261E699429EEC89F00E77A14 /* Providable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		261E699C29EEE0CA00E77A14 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */,
+				261E699A29EEE0C500E77A14 /* MainUIModel.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		261E699E29EEE0DF00E77A14 /* MatchVC */ = {
+			isa = PBXGroup;
+			children = (
+				26D3562329D870E6003940C2 /* MatchesViewController.swift */,
+				2604313A29D9508700085876 /* MatchManager.swift */,
+			);
+			path = MatchVC;
 			sourceTree = "<group>";
 		};
 		264CA4FF29EE93840053A559 /* Tests */ = {
@@ -182,8 +201,8 @@
 		26D3562229D86FBD003940C2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				26AD317B29B3B1A4001E8BE4 /* MainViewController.swift */,
-				26D3562329D870E6003940C2 /* MatchesViewController.swift */,
+				261E699E29EEE0DF00E77A14 /* MatchVC */,
+				261E699C29EEE0CA00E77A14 /* MainVC */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -328,6 +347,7 @@
 				26AD317C29B3B1A4001E8BE4 /* MainViewController.swift in Sources */,
 				264EDB7E29D8925300EAA0EF /* MatchTableViewCell.swift in Sources */,
 				26AD317829B3B1A4001E8BE4 /* AppDelegate.swift in Sources */,
+				261E699B29EEE0C500E77A14 /* MainUIModel.swift in Sources */,
 				26AD317A29B3B1A4001E8BE4 /* SceneDelegate.swift in Sources */,
 				26058CE429C8819500DC3EEA /* UserInfoObject.swift in Sources */,
 				26FC683E29C9DDF700B398E2 /* NetworkError.swift in Sources */,
