@@ -47,6 +47,23 @@ final class MainUIModel {
         fetchImages()
     }
     
+    func fetchImages() {
+        let players = calculateTopTenUsedPlayer()
+        
+        players.forEach { playerID in
+            let networkModel = NetworkManager(type: .actionImage(id: playerID))
+            
+            networkModel.fetchDataByImage { [weak self] result in
+                switch result {
+                case .success(let image):
+                    guard let image = image else { return }
+                    self?.playerImages.append(image)
+                case .failure(_):
+                    return
+                }
+            }
+        }
+    }
     
     private func calculateTopTenUsedPlayer() -> [Int] {
         let players = playersCounter.sorted { $0.value > $1.value }.map { $0.key }
