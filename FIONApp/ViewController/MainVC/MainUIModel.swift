@@ -10,9 +10,18 @@ import UIKit
 final class MainUIModel {
     private var playersCounter: [Int: Int] = [:]
     private var playerImages: [UIImage] = []
+    private let group = DispatchGroup()
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
+    }
+    
+    func fetchPlayersImage(handler: @escaping () -> Void) {
+        group.enter()
+        
+        fetchAllMatchData()
+        
+        group.notify(queue: .global(), execute: handler)
     }
     
     func fetchAllMatchData() {
