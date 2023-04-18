@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
         guard let nickname = self.userTextField.text else { return }
         
         let contentType = ContentType.userInfo(nickname: nickname)
-        let networkModel = NetworkManager(type: ContentType.userInfo(nickname: nickname))
+        let networkModel = NetworkManager(type: contentType)
         
         modelManager.fetchUserDataByJson(manager: networkModel, UserInfoObject.self) { [weak self] result in
             switch result {
