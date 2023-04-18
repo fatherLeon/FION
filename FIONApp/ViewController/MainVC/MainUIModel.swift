@@ -43,6 +43,12 @@ final class MainUIModel {
                 }
             }
         }
+        
+        fetchImages()
+    }
+    
+    func fetchImages() {
+        
     }
     
     private func calculateUsedPlayer(_ players: [Player]) {
