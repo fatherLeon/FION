@@ -9,7 +9,7 @@ import UIKit
 
 struct StubData {
     
-    static let imageData: Data = UIImage(named: "star")!.pngData()!
+    static let imageData: Data = UIImage(systemName: "star")!.pngData()!
     static let matchData: Data = """
 {
         "matchId": "63f18d93e982f639cfe3822c",
