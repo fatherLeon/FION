@@ -11,8 +11,8 @@ struct NetworkManager {
     private var type: ContentType
     private let provider: Providable
     
-    init(session: URLSession = .shared, type: ContentType) {
-        self.provider = APIProvider(session: session)
+    init(provider: Providable = APIProvider(session: .shared), type: ContentType) {
+        self.provider = provider
         self.type = type
     }
     
