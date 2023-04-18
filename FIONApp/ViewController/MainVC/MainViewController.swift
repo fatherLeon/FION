@@ -26,9 +26,10 @@ class MainViewController: UIViewController {
     @objc func didTapSearchButton() {
         guard let nickname = self.userTextField.text else { return }
         
-        userNetworkManager = NetworkManager(type: ContentType.userInfo(nickname: nickname))
+        let contentType = ContentType.userInfo(nickname: nickname)
+        let networkModel = NetworkManager(type: ContentType.userInfo(nickname: nickname))
         
-        userNetworkManager?.fetchDataByJson(to: UserInfoObject.self) { [weak self] result in
+        modelManager.fetchUserDataByJson(manager: networkModel, UserInfoObject.self) { [weak self] result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
