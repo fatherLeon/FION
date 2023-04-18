@@ -70,7 +70,7 @@ final class NetworkManagerTests: XCTestCase {
         sut.fetchDataByImage { event in
             switch event {
             case .success(let image):
-                XCTAssertEqual(image!, UIImage(data: StubData.imageData)!)
+                XCTAssertEqual(image!.pngData(), UIImage(data: StubData.imageData)!.pngData())
                 expectation.fulfill()
             case .failure(_):
                 XCTFail("Incorrect Test Case")
