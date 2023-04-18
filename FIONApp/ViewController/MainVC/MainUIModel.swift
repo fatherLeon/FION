@@ -17,9 +17,8 @@ final class MainUIModel {
     }
     
     func fetchPlayersImage(handler: @escaping () -> Void) {
-        group.enter()
-        
         fetchAllMatchData()
+        fetchImages(handler: handler)
         
         group.notify(queue: .global(), execute: handler)
     }
@@ -52,11 +51,10 @@ final class MainUIModel {
                 }
             }
         }
-        
-        fetchImages()
     }
     
-    func fetchImages() {
+    func fetchImages(handler: @escaping () -> Void) {
+        group.enter()
         let players = calculateTopTenUsedPlayer()
         
         players.forEach { playerID in
@@ -67,6 +65,7 @@ final class MainUIModel {
                 case .success(let image):
                     guard let image = image else { return }
                     self?.playerImages.append(image)
+                    self?.group.leave()
                 case .failure(_):
                     return
                 }
