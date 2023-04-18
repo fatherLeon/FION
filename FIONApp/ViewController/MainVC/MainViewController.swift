@@ -9,6 +9,10 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    // MARK: - Properties
+    private let modelManager = MainUIModel()
+    
+    // MARK: - UI Properties
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
