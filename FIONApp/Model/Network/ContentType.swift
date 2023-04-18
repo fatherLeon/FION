@@ -12,17 +12,19 @@ enum ContentType {
     case userMatch(id: String, matchType: Int, offset: Int = 0, limit: Int = 100)
     case match(matchid: String)
     case allMatch(matchtype: Int = 50, offset: Int = 0, limit: Int = 100, orderby: String = "desc")
-    
-    private var baseURL: URL? {
-        return URL(string: "https://api.nexon.co.kr/fifaonline4/v1.0/")
-    }
+    case actionImage(id: Int)
     
     private var scheme: String {
         return "https"
     }
     
     private var host: String {
-        return "api.nexon.co.kr"
+        switch self {
+        case .actionImage(_):
+            return "fo4.dn.nexoncdn.co.kr"
+        default:
+            return "api.nexon.co.kr"
+        }
     }
     
     private var path: String {
@@ -37,6 +39,8 @@ enum ContentType {
             basicPath.append("/matches/\(matchid)")
         case .allMatch(_, _, _, _):
             basicPath.append("/matches")
+        case .actionImage(let id):
+            return "/live/externalAssets/common/playersAction/p\(id).png"
         }
         
         return basicPath
@@ -54,8 +58,6 @@ enum ContentType {
             let limitQuery = URLQueryItem(name: "limit", value: "\(limit)")
             
             return [matchTypeQuery, offsetQuery, limitQuery]
-        case .match(_):
-            return nil
         case .allMatch(let matchtype, let offset, let limit, let orderby):
             let matchtypeQuery = URLQueryItem(name: "matchtype", value: "\(matchtype)")
             let offsetQuery = URLQueryItem(name: "offset", value: "\(offset)")
@@ -63,6 +65,8 @@ enum ContentType {
             let orderbyQuery = URLQueryItem(name: "orderby", value: orderby)
             
             return [matchtypeQuery, offsetQuery, limitQuery, orderbyQuery]
+        default:
+            return nil
         }
     }
     
