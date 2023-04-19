@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
+    private var collectionView = UICollectionView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,7 @@ extension MainViewController {
         configureLogoImageView()
         configureUserTextField()
         configureSearchButton()
+        configureCollectionView()
     }
     
     private func configureLogoImageView() {
@@ -133,5 +135,17 @@ extension MainViewController {
         ])
         
         self.searchButton.addTarget(self, action: #selector(didTapSearchButton), for: .touchUpInside)
+    }
+    
+    private func configureCollectionView() {
+        
+        self.view.addSubview(self.collectionView)
+        
+        NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 }
