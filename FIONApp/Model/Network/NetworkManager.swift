@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NetworkManager {
+struct NetworkManager {
     private var type: ContentType
     private let provider: Providable
     
@@ -16,7 +16,7 @@ final class NetworkManager {
         self.type = type
     }
     
-    func changeContentType(_ type: ContentType) {
+    mutating func changeContentType(_ type: ContentType) {
         self.type = type
     }
     
