@@ -8,9 +8,14 @@
 import UIKit
 
 final class MainUIModel {
-    private let dataGroup = DispatchGroup()
     private let imageGroup = DispatchGroup()
-    private var playersCounter: [Int: Int] = [:]
+    private let matchGroup = DispatchGroup()
+    private let dataGroup = DispatchGroup()
+    private var matchDescManager: NetworkManager?
+    private var imageManager: NetworkManager?
+    
+    var ids: [String] = []
+    var playersCounter: [Int: Int] = [:]
     var playerImages: [UIImage] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -19,74 +24,85 @@ final class MainUIModel {
     
     func fetchPlayerImages(handler: @escaping () -> Void) {
         fetchAllMatchData()
-        
-        dataGroup.notify(queue: .global()) { [weak self] in
-            self?.fetchImages()
-        }
-        
-        imageGroup.notify(queue: .global()) {
-            handler()
-        }
+        fetchMatchDescData()
+        fetchImages(handler: handler)
     }
     
-    func fetchAllMatchData() {
+    private func fetchAllMatchData() {
         let manager = NetworkManager(type: .allMatch())
-        
+        matchGroup.enter()
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.fetchMatchDescData(data.matchIds)
+                self?.ids = data.matchIds
+                self?.matchGroup.leave()
             case .failure(_):
                 return
             }
         }
+        
+        matchGroup.wait()
     }
     
-    private func fetchMatchDescData(_ ids: [String]) {
+    private func fetchMatchDescData() {
+        guard let firstId = self.ids.first else { return }
+        
+        matchDescManager = NetworkManager(type: .match(matchid: firstId))
+        
         ids.forEach { id in
             dataGroup.enter()
-            let networkModel = NetworkManager(type: .match(matchid: id))
-            
-            networkModel.fetchDataByJson(to: MatchObject.self) { [weak self] result in
+            matchDescManager?.changeContentType(.match(matchid: id))
+            matchDescManager?.fetchDataByJson(to: MatchObject.self) { [weak self] result in
                 switch result {
                 case .success(let data):
-                    let players = data.matchInfo[0].player
-                    
-                    self?.calculateUsedPlayer(players)
+                    self?.addPlayer(data.matchInfo)
                     self?.dataGroup.leave()
                 case .failure(_):
                     return
                 }
             }
         }
+        
+        dataGroup.wait()
     }
     
-    func fetchImages() {
-        let players = calculateTopTenUsedPlayer()
+    private func fetchImages(handler: @escaping () -> Void) {
+        let playersIds = calculateTopTenUsedPlayer()
         
-        players.forEach { playerID in
+        guard let firstId = playersIds.first else { return }
+        
+        imageManager = NetworkManager(type: .actionImage(id: firstId))
+        
+        playersIds.forEach { id in
             imageGroup.enter()
+            imageManager?.changeContentType(.actionImage(id: id))
             
-            let networkModel = NetworkManager(type: .actionImage(id: playerID))
-            
-            networkModel.fetchDataByImage { [weak self] result in
+            imageManager?.fetchDataByImage { [weak self] result in
                 switch result {
                 case .success(let image):
-                    guard let image = image else { return }
-                    
-                    self?.playerImages.append(image)
                     self?.imageGroup.leave()
+                    guard let image = image else { return }
+                    self?.playerImages.append(image)
                 case .failure(_):
-                    return
+                    self?.imageGroup.leave()
                 }
             }
         }
+        
+        imageGroup.wait()
+        handler()
     }
     
     private func calculateTopTenUsedPlayer() -> [Int] {
         let players = playersCounter.sorted { $0.value > $1.value }.map { $0.key }
         
-        return players
+        return players[0..<10].map { Int($0) }
+    }
+    
+    private func addPlayer(_ matches: [MatchInfo]) {
+        matches.forEach { info in
+            calculateUsedPlayer(info.player)
+        }
     }
     
     private func calculateUsedPlayer(_ players: [Player]) {

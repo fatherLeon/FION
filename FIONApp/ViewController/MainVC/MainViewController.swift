@@ -21,6 +21,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+
+        modelManager.fetchPlayerImages {
+            print("끝")
+        }
     }
     
     @objc func didTapSearchButton() {
