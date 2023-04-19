@@ -14,9 +14,9 @@ final class MainUIModel {
     private var matchDescManager: NetworkManager?
     private var imageManager: NetworkManager?
     
-    var ids: [String] = []
-    var playersCounter: [Int: Int] = [:]
-    var playerImages: [UIImage] = []
+    private var ids: [String] = []
+    private var playersCounter: [Int: Int] = [:]
+    private var playerImages: [UIImage] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
