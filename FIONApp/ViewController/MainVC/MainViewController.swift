@@ -16,16 +16,29 @@ class MainViewController: UIViewController {
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
-    private var collectionView = UICollectionView()
+//    private var collectionView = UICollectionView()
+    private var loadingView = UIActivityIndicatorView(style: .large)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-
+        startLoadingView()
+        
         modelManager.fetchPlayerImages {
-            print("끝")
+            DispatchQueue.main.async {
+                self.stopLoadingView()
+            }
         }
+    }
+    
+    private func startLoadingView() {
+        self.loadingView.startAnimating()
+        
+    }
+    
+    private func stopLoadingView() {
+        self.loadingView.stopAnimating()
     }
     
     @objc func didTapSearchButton() {
@@ -79,6 +92,7 @@ extension MainViewController {
         configureUserTextField()
         configureSearchButton()
         configureCollectionView()
+        configureLoadingView()
     }
     
     private func configureLogoImageView() {
@@ -138,14 +152,21 @@ extension MainViewController {
     }
     
     private func configureCollectionView() {
+//        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(self.collectionView)
+//        
+//        NSLayoutConstraint.activate([
+//            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
+//            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+//            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+//            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+//        ])
+    }
+    
+    private func configureLoadingView() {
+        self.loadingView.center = self.view.center
+        self.loadingView.color = .red
         
-        self.view.addSubview(self.collectionView)
-        
-        NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+        self.view.addSubview(self.loadingView)
     }
 }
