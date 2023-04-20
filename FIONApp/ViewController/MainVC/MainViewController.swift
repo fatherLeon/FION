@@ -9,10 +9,10 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    enum PlayerSection {
+    enum PlayerSection: CaseIterable {
         case goalkeeper
         case defender
-        case midfield
+        case midfielder
         case striker
     }
     
@@ -32,6 +32,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        createDatasource()
         startLoadingView()
         
         modelManager.fetchPlayerImages {
@@ -39,11 +40,12 @@ class MainViewController: UIViewController {
                 self.stopLoadingView()
             }
         }
+        
+        applySnapshot(by: .goalkeeper, to: UIImage(named: "FIFALogo")!)
     }
     
     private func startLoadingView() {
         self.loadingView.startAnimating()
-        
     }
     
     private func stopLoadingView() {
@@ -79,10 +81,10 @@ class MainViewController: UIViewController {
 extension MainViewController {
     
     private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(200),
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         
@@ -109,6 +111,15 @@ extension MainViewController {
         }
         
         self.datasource = dataSource
+    }
+    
+    private func applySnapshot(by section: PlayerSection, to image: UIImage) {
+        var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, UIImage>()
+        
+        snapshot.appendSections([section])
+        snapshot.appendItems([image])
+        
+        self.datasource?.apply(snapshot)
     }
 }
 
