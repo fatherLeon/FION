@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
-//    private var collectionView = UICollectionView()
+    private var collectionView = UICollectionView()
     private var loadingView = UIActivityIndicatorView(style: .large)
 
     override func viewDidLoad() {
@@ -67,7 +67,22 @@ class MainViewController: UIViewController {
     } 
 }
 
-extension MainViewController: UITextFieldDelegate {
+extension MainViewController {
+    
+    private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(200),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .continuous
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
 }
 
 // MARK: - UI
@@ -152,15 +167,15 @@ extension MainViewController {
     }
     
     private func configureCollectionView() {
-//        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addSubview(self.collectionView)
-//        
-//        NSLayoutConstraint.activate([
-//            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
-//            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-//            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-//            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-//        ])
+        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.collectionView)
+
+        NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
     
     private func configureLoadingView() {
