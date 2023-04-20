@@ -9,8 +9,17 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    enum PlayerSection {
+        case goalkeeper
+        case defender
+        case midfield
+        case striker
+    }
+    
     // MARK: - Properties
     private let modelManager = MainUIModel()
+    
+    private var datasource: UICollectionViewDiffableDataSource<PlayerSection, UIImage>?
     
     // MARK: - UI Properties
     private var logoImageView = UIImageView()
@@ -82,6 +91,24 @@ extension MainViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+    
+    private func createDatasource() {
+        guard let collectionView = self.collectionView else { return }
+        
+        let cellRegistration = UICollectionView.CellRegistration<PlayerImageCell, UIImage> { cell, indexPath, itemIdentifier in
+            
+            cell.updateImage(itemIdentifier)
+        }
+        
+        let dataSource = UICollectionViewDiffableDataSource<PlayerSection, UIImage>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: itemIdentifier)
+        }
+        
+        self.datasource = dataSource
     }
 }
 
