@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     private var logoImageView = UIImageView()
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
-    private var collectionView = UICollectionView()
+    private var collectionView: UICollectionView?
     private var loadingView = UIActivityIndicatorView(style: .large)
 
     override func viewDidLoad() {
@@ -127,8 +127,6 @@ extension MainViewController {
     }
     
     private func configureUserTextField() {
-        self.userTextField.delegate = self
-        
         self.userTextField.translatesAutoresizingMaskIntoConstraints = false
         self.userTextField.borderStyle = .roundedRect
         self.userTextField.backgroundColor = .systemGray
@@ -167,15 +165,18 @@ extension MainViewController {
     }
     
     private func configureCollectionView() {
-        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.collectionView)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            collectionView.topAnchor.constraint(equalTo: self.userTextField.bottomAnchor, constant: 30),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        
+        self.collectionView = collectionView
     }
     
     private func configureLoadingView() {
