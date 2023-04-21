@@ -22,7 +22,7 @@ enum PlayerSection: CaseIterable {
         case .sideback:
             return [2, 3, 7, 8]
         case .midfielder:
-            return [9, 10, 11, 13, 14, 15, 16, 17, 18, 19]
+            return [9, 10, 11, 13, 14, 15, 17, 18, 19]
         case .winger:
             return [12, 16, 23, 27]
         case .striker:
