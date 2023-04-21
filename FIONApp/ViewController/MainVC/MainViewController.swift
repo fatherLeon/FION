@@ -60,6 +60,19 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func applySnapshot(by section: PlayerSection, to model: [PlayerModel]) {
+        snapshot.appendSections([section])
+        snapshot.appendItems(model)
+        
+        self.datasource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func deleteSnaphost(by section: PlayerSection) {
+        snapshot.deleteSections([section])
+        
+        self.datasource?.apply(snapshot, animatingDifferences: true)
+    }
+    
     @objc func didTapSearchButton() {
         guard let nickname = self.userTextField.text else { return }
         
@@ -103,8 +116,8 @@ extension MainViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
         section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
         section.orthogonalScrollingBehavior = .continuous
         
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -139,13 +152,6 @@ extension MainViewController {
         datasource?.supplementaryViewProvider = { (view, kind, index) in
             return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
         }
-    }
-    
-    private func applySnapshot(by section: PlayerSection, to model: [PlayerModel]) {
-        snapshot.appendSections([section])
-        snapshot.appendItems(model)
-        
-        self.datasource?.apply(snapshot, animatingDifferences: true)
     }
 }
 

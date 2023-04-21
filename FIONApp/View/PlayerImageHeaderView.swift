@@ -41,7 +41,7 @@ extension PlayerImageHeaderView {
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: self.topAnchor, constant: inset),
-            label.leadingAnchor.constraint(equalTo: self.leftAnchor, constant: inset),
+            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
             label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset)
         ])
