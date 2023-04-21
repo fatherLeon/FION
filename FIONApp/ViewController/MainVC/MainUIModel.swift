@@ -8,6 +8,7 @@
 import UIKit
 
 final class MainUIModel {
+    private let seasonGroup = DispatchGroup()
     private let playerGroup = DispatchGroup()
     private let imageGroup = DispatchGroup()
     private let matchGroup = DispatchGroup()
@@ -17,6 +18,7 @@ final class MainUIModel {
     
     private var matchIds: [String] = []
     private var players: [PlayerObject] = []
+    private var seasonCounter: [Int: UIImage?] = [:]
     var playersCounter: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -44,6 +46,33 @@ final class MainUIModel {
         }
         
         playerGroup.wait()
+    }
+    
+    private func fetchAllSeason() {
+        let manager = NetworkManager(type: .season)
+        seasonGroup.enter()
+        manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.fetchSeasonImage(data)
+                self?.seasonGroup.leave()
+            case .failure(_):
+                return
+            }
+        }
+        
+        seasonGroup.wait()
+    }
+    
+    private func fetchSeasonImage(_ data: [SeasonObject]) {
+        let networkModel = NetworkManager(type: .season)
+        data.forEach { season in
+            guard let url = URL(string: season.seasonImg),
+                  let data = try? Data(contentsOf: url),
+                  let image = UIImage(data: data) else { return }
+            
+            seasonCounter[season.seasonId] = image
+        }
     }
     
     private func fetchAllMatchData() {
