@@ -66,14 +66,21 @@ final class MainUIModel {
     }
     
     private func fetchSeasonImage(_ data: [SeasonObject]) {
-//        let networkModel = NetworkManager(type: .season)
-//        data.forEach { season in
-//            guard let url = URL(string: season.seasonImg),
-//                  let data = try? Data(contentsOf: url),
-//                  let image = UIImage(data: data) else { return }
-//
-//            seasonCounter[season.seasonId] = image
-//        }
+        guard let firstData = data.first else { return }
+        
+        var networkModel = NetworkManager(type: .url(url: firstData.seasonImg))
+        
+        data.forEach { season in
+            networkModel.changeContentType(.url(url: season.seasonImg))
+            networkModel.fetchDataByImage { [weak self] result in
+                switch result {
+                case .success(let image):
+                    self?.seasonCounter[season.seasonId] = image
+                case .failure(_):
+                    return
+                }
+            }
+        }
     }
     
     private func fetchAllMatchData() {
