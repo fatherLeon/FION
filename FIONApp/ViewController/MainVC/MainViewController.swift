@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     private let modelManager = MainUIModel()
     
     private var datasource: UICollectionViewDiffableDataSource<PlayerSection, UIImage>?
+    private var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, UIImage>()
     
     // MARK: - UI Properties
     private var logoImageView = UIImageView()
@@ -33,11 +34,18 @@ class MainViewController: UIViewController {
         
         configureUI()
         createDatasource()
-        startLoadingView()
         
         modelManager.fetchPlayerImages {
             DispatchQueue.main.async {
-                self.applySnapshot(by: .goalkeeper, to: self.modelManager.playerImages)
+                let keeper = Array(self.modelManager.playerImages[0...5])
+                let defender = Array(self.modelManager.playerImages[6...10])
+                let midfielder = Array(self.modelManager.playerImages[11...15])
+                let striker = Array(self.modelManager.playerImages[20...24])
+                
+                self.applySnapshot(by: .goalkeeper, to: keeper)
+                self.applySnapshot(by: .defender, to: defender)
+                self.applySnapshot(by: .midfielder, to: midfielder)
+                self.applySnapshot(by: .striker, to: striker)
                 self.stopLoadingView()
             }
         }
@@ -87,6 +95,7 @@ extension MainViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
         section.orthogonalScrollingBehavior = .continuous
         
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -114,8 +123,6 @@ extension MainViewController {
     }
     
     private func applySnapshot(by section: PlayerSection, to images: [UIImage]) {
-        var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, UIImage>()
-        
         snapshot.appendSections([section])
         snapshot.appendItems(images)
         
@@ -141,11 +148,12 @@ extension MainViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .systemBackground
         
+        configureLoadingView()
+        startLoadingView()
         configureLogoImageView()
         configureUserTextField()
         configureSearchButton()
         configureCollectionView()
-        configureLoadingView()
     }
     
     private func configureLogoImageView() {
