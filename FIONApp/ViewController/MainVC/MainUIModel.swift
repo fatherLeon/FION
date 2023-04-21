@@ -15,7 +15,7 @@ final class MainUIModel {
     private var imageManager: NetworkManager?
     
     private var ids: [String] = []
-    private var playersCounter: [Int: Int] = [:]
+    private var playersCounter: [Int: PlayerModel] = [:]
     var playerImages: [UIImage] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -94,7 +94,7 @@ final class MainUIModel {
     }
     
     private func calculateTopTenUsedPlayer() -> [Int] {
-        let players = playersCounter.sorted { $0.value > $1.value }.map { $0.key }
+        let players = playersCounter.sorted { $0.value.count > $1.value.count }.map { $0.key }
         
         return players[0..<30].map { Int($0) }
     }
@@ -108,23 +108,21 @@ final class MainUIModel {
     private func calculateUsedPlayer(_ players: [Player]) {
         players.forEach { player in
             if self.playersCounter[player.spID] == nil {
-                self.playersCounter[player.spID] = 1
+                self.playersCounter[player.spID] = PlayerModel(position: player.spPosition)
             } else {
-                self.playersCounter[player.spID]? += 1
+                self.playersCounter[player.spID]?.count += 1
             }
         }
     }
 }
 
 struct PlayerModel {
-    var count = 0
+    var count = 1
     var position: Int
-    var name: String
     var image: UIImage?
     
-    init(position: Int, name: String, image: UIImage? = nil) {
+    init(position: Int, image: UIImage? = nil) {
         self.position = position
-        self.name = name
         self.image = image
     }
 }
