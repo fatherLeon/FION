@@ -26,6 +26,7 @@ final class MainUIModel {
     }
     
     func fetchPlayerImages(handler: @escaping () -> Void) {
+        fetchAllSeason()
         fetchAllPlayers()
         fetchAllMatchData()
         fetchMatchDescData()
@@ -65,14 +66,14 @@ final class MainUIModel {
     }
     
     private func fetchSeasonImage(_ data: [SeasonObject]) {
-        let networkModel = NetworkManager(type: .season)
-        data.forEach { season in
-            guard let url = URL(string: season.seasonImg),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data) else { return }
-            
-            seasonCounter[season.seasonId] = image
-        }
+//        let networkModel = NetworkManager(type: .season)
+//        data.forEach { season in
+//            guard let url = URL(string: season.seasonImg),
+//                  let data = try? Data(contentsOf: url),
+//                  let image = UIImage(data: data) else { return }
+//
+//            seasonCounter[season.seasonId] = image
+//        }
     }
     
     private func fetchAllMatchData() {
@@ -134,6 +135,15 @@ final class MainUIModel {
                     
                     self?.playersCounter[id]?.image = image
                     self?.playersCounter[id]?.name = name
+                    
+                    let startIndex = "\(id)".startIndex
+                    let endIndex = "\(id)".index(startIndex, offsetBy: 2)
+                    let seasonId = "\(id)"[startIndex...endIndex]
+                    
+                    guard let key = Int(seasonId),
+                          let seasonImage = self?.seasonCounter[key] else { return }
+                    
+                    self?.playersCounter[id]?.seasonImage = seasonImage
                 case .failure(_):
                     self?.imageGroup.leave()
                 }
