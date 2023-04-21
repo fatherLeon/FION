@@ -174,7 +174,7 @@ final class MainUIModel {
             if self.playersCounter[player.spID] == nil {
                 self.playersCounter[player.spID] = PlayerModel(position: player.spPosition)
             } else {
-                self.playersCounter[player.spID]?.count += 1
+                self.playersCounter[player.spID]?.updateModel(by: player)
             }
         }
     }
