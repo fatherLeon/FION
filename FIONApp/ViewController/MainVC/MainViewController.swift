@@ -37,11 +37,10 @@ class MainViewController: UIViewController {
         
         modelManager.fetchPlayerImages {
             DispatchQueue.main.async {
+                self.applySnapshot(by: .goalkeeper, to: self.modelManager.playerImages)
                 self.stopLoadingView()
             }
         }
-        
-        applySnapshot(by: .goalkeeper, to: UIImage(named: "FIFALogo")!)
     }
     
     private func startLoadingView() {
@@ -81,10 +80,10 @@ class MainViewController: UIViewController {
 extension MainViewController {
     
     private func createCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         
@@ -99,25 +98,26 @@ extension MainViewController {
         guard let collectionView = self.collectionView else { return }
         
         let cellRegistration = UICollectionView.CellRegistration<PlayerImageCell, UIImage> { cell, indexPath, itemIdentifier in
+            cell.contentView.layer.borderColor = UIColor.black.cgColor
+            cell.contentView.layer.borderWidth = 1
+            cell.contentView.layer.cornerRadius = 8
             
             cell.updateImage(itemIdentifier)
         }
         
-        let dataSource = UICollectionViewDiffableDataSource<PlayerSection, UIImage>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        datasource = UICollectionViewDiffableDataSource<PlayerSection, UIImage>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                                 for: indexPath,
                                                                 item: itemIdentifier)
         }
-        
-        self.datasource = dataSource
     }
     
-    private func applySnapshot(by section: PlayerSection, to image: UIImage) {
+    private func applySnapshot(by section: PlayerSection, to images: [UIImage]) {
         var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, UIImage>()
         
         snapshot.appendSections([section])
-        snapshot.appendItems([image])
+        snapshot.appendItems(images)
         
         self.datasource?.apply(snapshot)
     }

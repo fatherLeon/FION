@@ -40,5 +40,7 @@ extension PlayerImageCell {
             imageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
+        
+        self.imageView = imageView
     }
 }
