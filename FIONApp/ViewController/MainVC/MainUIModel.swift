@@ -16,7 +16,7 @@ final class MainUIModel {
     private var imageManager: NetworkManager?
     
     private var matchIds: [String] = []
-    private var players: [PlayerObject.PlayerInfoObject] = []
+    private var players: [PlayerObject] = []
     var playersCounter: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -33,10 +33,10 @@ final class MainUIModel {
     private func fetchAllPlayers() {
         let manager = NetworkManager(type: .allPlayer)
         playerGroup.enter()
-        manager.fetchDataByJson(to: PlayerObject.self) { [weak self] result in
+        manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.players = data.players
+                self?.players = data
                 self?.playerGroup.leave()
             case .failure(_):
                 return
@@ -101,7 +101,7 @@ final class MainUIModel {
                     self?.imageGroup.leave()
                     guard let image = image else { return }
                     
-                    let name = self?.players.filter { $0.id == "\(id)" }.first?.name
+                    let name = self?.players.filter { $0.id == id }.first?.name
                     
                     self?.playersCounter[id]?.image = image
                     self?.playersCounter[id]?.name = name

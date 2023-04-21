@@ -54,6 +54,7 @@ extension PlayerImageCell {
         let playerNameLabel = UILabel()
         
         playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        playerNameLabel.adjustsFontSizeToFitWidth = true
         playerNameLabel.font = .preferredFont(forTextStyle: .body)
         playerNameLabel.textAlignment = .center
         playerNameLabel.numberOfLines = 1
@@ -86,7 +87,7 @@ extension PlayerImageCell {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
             stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
     }

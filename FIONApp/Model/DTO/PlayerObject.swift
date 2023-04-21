@@ -8,14 +8,6 @@
 import Foundation
 
 struct PlayerObject: Decodable {
-    struct PlayerInfoObject: Decodable {
-        let id: String
-        let name: String
-    }
-    
-    let players: [PlayerInfoObject]
-    
-    init(from decoder: Decoder) throws {
-        players = try decoder.singleValueContainer().decode([PlayerInfoObject].self)
-    }
+    let id: Int
+    let name: String
 }
