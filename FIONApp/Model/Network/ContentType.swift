@@ -13,6 +13,7 @@ enum ContentType {
     case match(matchid: String)
     case allMatch(matchtype: Int = 50, offset: Int = 0, limit: Int = 100, orderby: String = "desc")
     case actionImage(id: Int)
+    case allPlayer
     
     private var scheme: String {
         return "https"
@@ -22,6 +23,8 @@ enum ContentType {
         switch self {
         case .actionImage(_):
             return "fo4.dn.nexoncdn.co.kr"
+        case .allPlayer:
+            return "static.api.nexon.co.kr"
         default:
             return "api.nexon.co.kr"
         }
@@ -41,6 +44,8 @@ enum ContentType {
             basicPath.append("/matches")
         case .actionImage(let id):
             return "/live/externalAssets/common/playersAction/p\(id).png"
+        case .allPlayer:
+            return "/fifaonline4/latest/spid.json"
         }
         
         return basicPath
