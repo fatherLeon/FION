@@ -37,6 +37,7 @@
 		26DD030D29ED59DA0093C12D /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DD030C29ED59DA0093C12D /* MockURLProtocol.swift */; };
 		26E050D429F279FD00A27EE5 /* PlayerObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E050D329F279FD00A27EE5 /* PlayerObject.swift */; };
 		26E050D629F27FB700A27EE5 /* SeasonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E050D529F27FB700A27EE5 /* SeasonObject.swift */; };
+		26E050D829F2C1A700A27EE5 /* PlayerImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E050D729F2C1A700A27EE5 /* PlayerImageHeaderView.swift */; };
 		26FC683929C9D66200B398E2 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC683829C9D66200B398E2 /* APIProvider.swift */; };
 		26FC683C29C9D6F000B398E2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC683B29C9D6F000B398E2 /* ContentType.swift */; };
 		26FC683E29C9DDF700B398E2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC683D29C9DDF700B398E2 /* NetworkError.swift */; };
@@ -85,6 +86,7 @@
 		26DD030C29ED59DA0093C12D /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		26E050D329F279FD00A27EE5 /* PlayerObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObject.swift; sourceTree = "<group>"; };
 		26E050D529F27FB700A27EE5 /* SeasonObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonObject.swift; sourceTree = "<group>"; };
+		26E050D729F2C1A700A27EE5 /* PlayerImageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageHeaderView.swift; sourceTree = "<group>"; };
 		26E8C43429D8301000665180 /* ContentTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTypeTests.swift; sourceTree = "<group>"; };
 		26FC683829C9D66200B398E2 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
 		26FC683B29C9D6F000B398E2 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				264EDB7D29D8925300EAA0EF /* MatchTableViewCell.swift */,
 				26D7C26329F1FCDC008A5FE2 /* PlayerImageCell.swift */,
+				26E050D729F2C1A700A27EE5 /* PlayerImageHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				26FC683C29C9D6F000B398E2 /* ContentType.swift in Sources */,
 				26D7C26429F1FCDC008A5FE2 /* PlayerImageCell.swift in Sources */,
 				261E699529EEC89F00E77A14 /* Providable.swift in Sources */,
+				26E050D829F2C1A700A27EE5 /* PlayerImageHeaderView.swift in Sources */,
 				2604313B29D9508700085876 /* MatchManager.swift in Sources */,
 				26E050D629F27FB700A27EE5 /* SeasonObject.swift in Sources */,
 				264EDB8029D8933000EAA0EF /* Date+extension.swift in Sources */,
