@@ -14,6 +14,19 @@ class MainViewController: UIViewController {
         case defender
         case midfielder
         case striker
+        
+        var positionNumber: [Int] {
+            switch self {
+            case .goalkeeper:
+                return [0]
+            case .defender:
+                return Array(1...8)
+            case .midfielder:
+                return Array(9...19)
+            case .striker:
+                return Array(20...27)
+            }
+        }
     }
     
     // MARK: - Properties
@@ -38,16 +51,16 @@ class MainViewController: UIViewController {
         modelManager.fetchPlayerImages {
             DispatchQueue.main.async {
                 let keeper = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
-                    return player.position == 0 && player.image != nil
+                    return PlayerSection.goalkeeper.positionNumber.contains(player.position) && player.image != nil
                 })
                 let defender = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
-                    return Array(1...8).contains(player.position) && player.image != nil
+                    return PlayerSection.defender.positionNumber.contains(player.position) && player.image != nil
                 })
                 let midfielder = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
-                    return Array(9...19).contains(player.position) && player.image != nil
+                    return PlayerSection.midfielder.positionNumber.contains(player.position) && player.image != nil
                 })
                 let striker = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
-                    return Array(20...27).contains(player.position) && player.image != nil
+                    return PlayerSection.striker.positionNumber.contains(player.position) && player.image != nil
                 })
                 
                 self.applySnapshot(by: .goalkeeper, to: keeper)
