@@ -8,6 +8,7 @@
 import UIKit
 
 final class MainUIModel {
+    private let playerGroup = DispatchGroup()
     private let imageGroup = DispatchGroup()
     private let matchGroup = DispatchGroup()
     private let dataGroup = DispatchGroup()
@@ -15,6 +16,7 @@ final class MainUIModel {
     private var imageManager: NetworkManager?
     
     private var matchIds: [String] = []
+    private var players: [PlayerObject.PlayerInfoObject] = []
     var playersCounter: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -22,9 +24,26 @@ final class MainUIModel {
     }
     
     func fetchPlayerImages(handler: @escaping () -> Void) {
+        fetchAllPlayers()
         fetchAllMatchData()
         fetchMatchDescData()
         fetchImages(handler: handler)
+    }
+    
+    private func fetchAllPlayers() {
+        let manager = NetworkManager(type: .allPlayer)
+        playerGroup.enter()
+        manager.fetchDataByJson(to: PlayerObject.self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.players = data.players
+                self?.playerGroup.leave()
+            case .failure(_):
+                return
+            }
+        }
+        
+        playerGroup.wait()
     }
     
     private func fetchAllMatchData() {
