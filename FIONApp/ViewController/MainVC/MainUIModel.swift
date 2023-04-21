@@ -115,3 +115,16 @@ final class MainUIModel {
         }
     }
 }
+
+struct PlayerModel {
+    var count = 0
+    var position: Int
+    var name: String
+    var image: UIImage?
+    
+    init(position: Int, name: String, image: UIImage? = nil) {
+        self.position = position
+        self.name = name
+        self.image = image
+    }
+}
