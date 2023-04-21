@@ -29,4 +29,21 @@ enum PlayerSection: CaseIterable {
             return [20, 21, 22, 24, 25, 26]
         }
     }
+    
+    var positionDescription: String {
+        switch self {
+        case .goalkeeper:
+            return "골키퍼(GK)"
+        case .centerback:
+            return "센터백(SW, RCB, CB, LCB)"
+        case .sideback:
+            return "풀백, 윙백(RWB, RB, LB, LWB)"
+        case .midfielder:
+            return "미드필더"
+        case .winger:
+            return "윙어(RM, LM, RW, LW)"
+        case .striker:
+            return "공격수(RF, CF, LF, RS, ST, LS)"
+        }
+    }
 }
