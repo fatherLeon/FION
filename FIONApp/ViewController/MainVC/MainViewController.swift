@@ -93,6 +93,9 @@ extension MainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(3), top: .none, trailing: .fixed(3), bottom: .none)
+        
         let section = NSCollectionLayoutSection(group: group)
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
