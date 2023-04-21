@@ -12,6 +12,8 @@ struct PlayerModel: Hashable {
     var count = 1
     var position: Int
     var image: UIImage?
+    var seasonImage: UIImage?
+    var name: String?
     
     init(position: Int, image: UIImage? = nil) {
         self.position = position
