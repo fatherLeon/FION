@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
     private var userTextField = UITextField()
     private var searchButton = UIButton(type: .roundedRect)
     private var collectionView: UICollectionView?
-    private var loadingView = UIActivityIndicatorView(style: .large)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,31 +32,30 @@ class MainViewController: UIViewController {
                 let keeper = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.goalkeeper.positionNumber.contains(player.position) && player.image != nil
                 })
-                let defender = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.defender.positionNumber.contains(player.position) && player.image != nil
+                let centerback = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return PlayerSection.centerback.positionNumber.contains(player.position) && player.image != nil
+                })
+                let sideback = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return PlayerSection.sideback.positionNumber.contains(player.position) && player.image != nil
                 })
                 let midfielder = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.midfielder.positionNumber.contains(player.position) && player.image != nil
+                })
+                let winger = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return PlayerSection.winger.positionNumber.contains(player.position) && player.image != nil
                 })
                 let striker = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.striker.positionNumber.contains(player.position) && player.image != nil
                 })
                 
                 self.applySnapshot(by: .goalkeeper, to: keeper)
-                self.applySnapshot(by: .defender, to: defender)
+                self.applySnapshot(by: .centerback, to: centerback)
+                self.applySnapshot(by: .sideback, to: sideback)
                 self.applySnapshot(by: .midfielder, to: midfielder)
+                self.applySnapshot(by: .winger, to: winger)
                 self.applySnapshot(by: .striker, to: striker)
-                self.stopLoadingView()
             }
         }
-    }
-    
-    private func startLoadingView() {
-        self.loadingView.startAnimating()
-    }
-    
-    private func stopLoadingView() {
-        self.loadingView.stopAnimating()
     }
     
     @objc func didTapSearchButton() {
@@ -152,8 +150,6 @@ extension MainViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .systemBackground
         
-        configureLoadingView()
-        startLoadingView()
         configureLogoImageView()
         configureUserTextField()
         configureSearchButton()
@@ -227,12 +223,5 @@ extension MainViewController {
         ])
         
         self.collectionView = collectionView
-    }
-    
-    private func configureLoadingView() {
-        self.loadingView.center = self.view.center
-        self.loadingView.color = .red
-        
-        self.view.addSubview(self.loadingView)
     }
 }
