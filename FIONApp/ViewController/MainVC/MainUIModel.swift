@@ -8,11 +8,7 @@
 import UIKit
 
 final class MainUIModel {
-    private let seasonGroup = DispatchGroup()
-    private let playerGroup = DispatchGroup()
-    private let imageGroup = DispatchGroup()
-    private let matchGroup = DispatchGroup()
-    private let dataGroup = DispatchGroup()
+    private let group = DispatchGroup()
     private var matchDescManager: NetworkManager?
     private var imageManager: NetworkManager?
     
@@ -35,34 +31,34 @@ final class MainUIModel {
     
     private func fetchAllPlayers() {
         let manager = NetworkManager(type: .allPlayer)
-        playerGroup.enter()
+        group.enter()
         manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.players = data
-                self?.playerGroup.leave()
+                self?.group.leave()
             case .failure(_):
                 return
             }
         }
         
-        playerGroup.wait()
+        group.wait()
     }
     
     private func fetchAllSeason() {
         let manager = NetworkManager(type: .season)
-        seasonGroup.enter()
+        group.enter()
         manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.fetchSeasonImage(data)
-                self?.seasonGroup.leave()
+                self?.group.leave()
             case .failure(_):
                 return
             }
         }
         
-        seasonGroup.wait()
+        group.wait()
     }
     
     private func fetchSeasonImage(_ data: [SeasonObject]) {
@@ -85,18 +81,18 @@ final class MainUIModel {
     
     private func fetchAllMatchData() {
         let manager = NetworkManager(type: .allMatch())
-        matchGroup.enter()
+        group.enter()
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.matchIds = data.matchIds
-                self?.matchGroup.leave()
+                self?.group.leave()
             case .failure(_):
                 return
             }
         }
         
-        matchGroup.wait()
+        group.wait()
     }
     
     private func fetchMatchDescData() {
@@ -105,20 +101,20 @@ final class MainUIModel {
         matchDescManager = NetworkManager(type: .match(matchid: firstId))
         
         matchIds.forEach { id in
-            dataGroup.enter()
+            group.enter()
             matchDescManager?.changeContentType(.match(matchid: id))
             matchDescManager?.fetchDataByJson(to: MatchObject.self) { [weak self] result in
                 switch result {
                 case .success(let data):
                     self?.addPlayer(data.matchInfo)
-                    self?.dataGroup.leave()
+                    self?.group.leave()
                 case .failure(_):
                     return
                 }
             }
         }
         
-        dataGroup.wait()
+        group.wait()
     }
     
     private func fetchImages(handler: @escaping () -> Void) {
@@ -129,13 +125,13 @@ final class MainUIModel {
         imageManager = NetworkManager(type: .actionImage(id: firstId))
         
         playersIds.forEach { id in
-            imageGroup.enter()
+            group.enter()
             imageManager?.changeContentType(.actionImage(id: id))
             
             imageManager?.fetchDataByImage { [weak self] result in
                 switch result {
                 case .success(let image):
-                    self?.imageGroup.leave()
+                    self?.group.leave()
                     guard let image = image else { return }
                     
                     let name = self?.players.filter { $0.id == id }.first?.name
@@ -152,12 +148,12 @@ final class MainUIModel {
                     
                     self?.playersCounter[id]?.seasonImage = seasonImage
                 case .failure(_):
-                    self?.imageGroup.leave()
+                    self?.group.leave()
                 }
             }
         }
         
-        imageGroup.wait()
+        group.wait()
         handler()
     }
     
