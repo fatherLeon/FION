@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayerImageHeaderView: UIView {
+class PlayerImageHeaderView: UICollectionReusableView {
 
     let label = UILabel()
     

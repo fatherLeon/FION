@@ -123,11 +123,21 @@ extension MainViewController {
             cell.updateUI(itemIdentifier)
         }
         
+        let headerRegistration = UICollectionView.SupplementaryRegistration<PlayerImageHeaderView>(elementKind: MainViewController.headerElementKind) { supplementaryView, elementKind, indexPath in
+            guard let section = PlayerSection(rawValue: indexPath.section) else { return }
+            
+            supplementaryView.updateLabel(section: section)
+        }
+        
         datasource = UICollectionViewDiffableDataSource<PlayerSection, PlayerModel>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                                 for: indexPath,
                                                                 item: itemIdentifier)
+        }
+        
+        datasource?.supplementaryViewProvider = { (view, kind, index) in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
         }
     }
     

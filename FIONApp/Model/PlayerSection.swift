@@ -5,8 +5,8 @@
 //  Created by 강민수 on 2023/04/21.
 //
 
-enum PlayerSection: CaseIterable {
-    case goalkeeper
+enum PlayerSection: Int, CaseIterable {
+    case goalkeeper = 0
     case centerback
     case sideback
     case midfielder
