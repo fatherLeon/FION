@@ -101,7 +101,10 @@ final class MainUIModel {
                     self?.imageGroup.leave()
                     guard let image = image else { return }
                     
+                    let name = self?.players.filter { $0.id == "\(id)" }.first?.name
+                    
                     self?.playersCounter[id]?.image = image
+                    self?.playersCounter[id]?.name = name
                 case .failure(_):
                     self?.imageGroup.leave()
                 }
