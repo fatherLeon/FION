@@ -27,8 +27,8 @@ class PlayerImageCell: UICollectionViewCell {
     
     func updateUI(_ model: PlayerModel) {
         imageView?.image = model.image
-        seasonImageView?.image = UIImage(systemName: "star.fill")
-        playerNameLabel?.text = "abc"
+        seasonImageView?.image = model.seasonImage
+        playerNameLabel?.text = model.name
     }
 }
 
