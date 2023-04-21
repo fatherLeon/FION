@@ -128,7 +128,7 @@ extension MainViewController {
         snapshot.appendSections([section])
         snapshot.appendItems(model)
         
-        self.datasource?.apply(snapshot)
+        self.datasource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
