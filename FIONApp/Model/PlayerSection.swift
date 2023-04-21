@@ -26,7 +26,7 @@ enum PlayerSection: CaseIterable {
         case .winger:
             return [12, 16, 23, 27]
         case .striker:
-            return [20, 21, 22, 24, 25, 26, 27]
+            return [20, 21, 22, 24, 25, 26]
         }
     }
 }
