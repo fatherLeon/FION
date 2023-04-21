@@ -8,7 +8,12 @@
 import UIKit
 
 class PlayerImageCell: UICollectionViewCell {
+    
+    private let infoStackView = UIStackView()
+    
     private var imageView: UIImageView?
+    private var seasonImageView: UIImageView?
+    private var playerNameLabel: UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,13 +25,21 @@ class PlayerImageCell: UICollectionViewCell {
         fatalError("Unexpected Initalize Error")
     }
     
-    func updateImage(_ image: UIImage?) {
-        imageView?.image = image
+    func updateUI(_ model: PlayerModel) {
+        imageView?.image = model.image
+        seasonImageView?.image = UIImage(systemName: "star.fill")
+        playerNameLabel?.text = "abc"
     }
 }
 
 extension PlayerImageCell {
     private func configureUI() {
+        configurePlayerImageView()
+        cofigurePlayerInfoStackView()
+        configureMainStackView()
+    }
+    
+    private func configurePlayerImageView() {
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,13 +47,47 @@ extension PlayerImageCell {
         
         self.contentView.addSubview(imageView)
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        ])
-        
         self.imageView = imageView
+    }
+    
+    private func cofigurePlayerInfoStackView() {
+        let playerNameLabel = UILabel()
+        
+        playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        playerNameLabel.font = .preferredFont(forTextStyle: .body)
+        playerNameLabel.textAlignment = .center
+        playerNameLabel.numberOfLines = 1
+        
+        let seasonImageView = UIImageView()
+        
+        seasonImageView.translatesAutoresizingMaskIntoConstraints = false
+        seasonImageView.contentMode = .scaleAspectFit
+        
+        seasonImageView.setContentHuggingPriority(.required, for: .horizontal)
+        seasonImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        infoStackView.addArrangedSubview(seasonImageView)
+        infoStackView.addArrangedSubview(playerNameLabel)
+        
+        self.seasonImageView = seasonImageView
+        self.playerNameLabel = playerNameLabel
+    }
+    
+    private func configureMainStackView() {
+        guard let imageView = self.imageView else { return }
+        
+        let stackView = UIStackView(arrangedSubviews: [imageView, infoStackView])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        self.contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+        ])
     }
 }

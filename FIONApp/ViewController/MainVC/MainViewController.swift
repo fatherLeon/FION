@@ -115,7 +115,7 @@ extension MainViewController {
             cell.contentView.layer.borderWidth = 1
             cell.contentView.layer.cornerRadius = 8
             
-            cell.updateImage(itemIdentifier.image)
+            cell.updateUI(itemIdentifier)
         }
         
         datasource = UICollectionViewDiffableDataSource<PlayerSection, PlayerModel>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
