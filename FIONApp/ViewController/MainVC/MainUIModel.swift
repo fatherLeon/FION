@@ -115,15 +115,3 @@ final class MainUIModel {
         }
     }
 }
-
-struct PlayerModel: Hashable {
-    let id = UUID()
-    var count = 1
-    var position: Int
-    var image: UIImage?
-    
-    init(position: Int, image: UIImage? = nil) {
-        self.position = position
-        self.image = image
-    }
-}
