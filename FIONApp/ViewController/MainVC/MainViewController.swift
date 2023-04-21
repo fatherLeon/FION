@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    static let headerElementKind = "PlayerHeader"
+    
     // MARK: - Properties
     private let modelManager = MainUIModel()
     
@@ -95,9 +97,14 @@ extension MainViewController {
         
         group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(3), top: .none, trailing: .fixed(3), bottom: .none)
         
+        let headerViewSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(100))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerViewSize, elementKind: MainViewController.headerElementKind, alignment: .top)
+        
         let section = NSCollectionLayoutSection(group: group)
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
+        section.boundarySupplementaryItems = [header]
         section.orthogonalScrollingBehavior = .continuous
         
         let layout = UICollectionViewCompositionalLayout(section: section)
