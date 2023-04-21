@@ -78,18 +78,19 @@ extension PlayerImageCell {
         guard let imageView = self.imageView else { return }
         
         let stackView = UIStackView(arrangedSubviews: [imageView, infoStackView])
+        let inset: CGFloat = 5
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 6
+        stackView.spacing = inset
         
         self.contentView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
-            stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
-            stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
-            stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5)
+            stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset),
+            stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+            stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
+            stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset)
         ])
     }
 }
