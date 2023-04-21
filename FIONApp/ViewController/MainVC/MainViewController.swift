@@ -19,8 +19,8 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     private let modelManager = MainUIModel()
     
-    private var datasource: UICollectionViewDiffableDataSource<PlayerSection, UIImage>?
-    private var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, UIImage>()
+    private var datasource: UICollectionViewDiffableDataSource<PlayerSection, PlayerModel>?
+    private var snapshot = NSDiffableDataSourceSnapshot<PlayerSection, PlayerModel>()
     
     // MARK: - UI Properties
     private var logoImageView = UIImageView()
@@ -37,10 +37,18 @@ class MainViewController: UIViewController {
         
         modelManager.fetchPlayerImages {
             DispatchQueue.main.async {
-                let keeper = Array(self.modelManager.playerImages[0...5])
-                let defender = Array(self.modelManager.playerImages[6...10])
-                let midfielder = Array(self.modelManager.playerImages[11...15])
-                let striker = Array(self.modelManager.playerImages[20...24])
+                let keeper = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return player.position == 0 && player.image != nil
+                })
+                let defender = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return Array(1...8).contains(player.position) && player.image != nil
+                })
+                let midfielder = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return Array(9...19).contains(player.position) && player.image != nil
+                })
+                let striker = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                    return Array(20...27).contains(player.position) && player.image != nil
+                })
                 
                 self.applySnapshot(by: .goalkeeper, to: keeper)
                 self.applySnapshot(by: .defender, to: defender)
@@ -109,15 +117,15 @@ extension MainViewController {
     private func createDatasource() {
         guard let collectionView = self.collectionView else { return }
         
-        let cellRegistration = UICollectionView.CellRegistration<PlayerImageCell, UIImage> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<PlayerImageCell, PlayerModel> { cell, indexPath, itemIdentifier in
             cell.contentView.layer.borderColor = UIColor.black.cgColor
             cell.contentView.layer.borderWidth = 1
             cell.contentView.layer.cornerRadius = 8
             
-            cell.updateImage(itemIdentifier)
+            cell.updateImage(itemIdentifier.image)
         }
         
-        datasource = UICollectionViewDiffableDataSource<PlayerSection, UIImage>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        datasource = UICollectionViewDiffableDataSource<PlayerSection, PlayerModel>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                                 for: indexPath,
@@ -125,9 +133,9 @@ extension MainViewController {
         }
     }
     
-    private func applySnapshot(by section: PlayerSection, to images: [UIImage]) {
+    private func applySnapshot(by section: PlayerSection, to model: [PlayerModel]) {
         snapshot.appendSections([section])
-        snapshot.appendItems(images)
+        snapshot.appendItems(model)
         
         self.datasource?.apply(snapshot)
     }

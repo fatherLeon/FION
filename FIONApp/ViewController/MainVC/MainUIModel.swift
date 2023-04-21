@@ -14,9 +14,8 @@ final class MainUIModel {
     private var matchDescManager: NetworkManager?
     private var imageManager: NetworkManager?
     
-    private var ids: [String] = []
-    private var playersCounter: [Int: PlayerModel] = [:]
-    var playerImages: [UIImage] = []
+    private var matchIds: [String] = []
+    var playersCounter: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
@@ -34,7 +33,7 @@ final class MainUIModel {
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.ids = data.matchIds
+                self?.matchIds = data.matchIds
                 self?.matchGroup.leave()
             case .failure(_):
                 return
@@ -45,11 +44,11 @@ final class MainUIModel {
     }
     
     private func fetchMatchDescData() {
-        guard let firstId = self.ids.first else { return }
+        guard let firstId = self.matchIds.first else { return }
         
         matchDescManager = NetworkManager(type: .match(matchid: firstId))
         
-        ids.forEach { id in
+        matchIds.forEach { id in
             dataGroup.enter()
             matchDescManager?.changeContentType(.match(matchid: id))
             matchDescManager?.fetchDataByJson(to: MatchObject.self) { [weak self] result in
@@ -82,7 +81,8 @@ final class MainUIModel {
                 case .success(let image):
                     self?.imageGroup.leave()
                     guard let image = image else { return }
-                    self?.playerImages.append(image)
+                    
+                    self?.playersCounter[id]?.image = image
                 case .failure(_):
                     self?.imageGroup.leave()
                 }
@@ -96,7 +96,7 @@ final class MainUIModel {
     private func calculateTopTenUsedPlayer() -> [Int] {
         let players = playersCounter.sorted { $0.value.count > $1.value.count }.map { $0.key }
         
-        return players[0..<30].map { Int($0) }
+        return players[0..<100].map { Int($0) }
     }
     
     private func addPlayer(_ matches: [MatchInfo]) {
@@ -116,7 +116,8 @@ final class MainUIModel {
     }
 }
 
-struct PlayerModel {
+struct PlayerModel: Hashable {
+    let id = UUID()
     var count = 1
     var position: Int
     var image: UIImage?
