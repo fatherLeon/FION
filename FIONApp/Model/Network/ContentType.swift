@@ -15,6 +15,7 @@ enum ContentType {
     case actionImage(id: Int)
     case allPlayer
     case season
+    case url(url: String)
     
     private var scheme: String {
         return "https"
@@ -49,6 +50,8 @@ enum ContentType {
             return "/fifaonline4/latest/spid.json"
         case .season:
             return "/fifaonline4/latest/seasonid.json"
+        default:
+            return ""
         }
         
         return basicPath
@@ -79,13 +82,18 @@ enum ContentType {
     }
     
     var url: URL? {
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = self.scheme
-        urlComponents.host = self.host
-        urlComponents.path = self.path
-        urlComponents.queryItems = self.querys
-        
-        return urlComponents.url
+        switch self {
+        case .url(let url):
+            return URL(string: url)
+        default:
+            var urlComponents = URLComponents()
+            
+            urlComponents.scheme = self.scheme
+            urlComponents.host = self.host
+            urlComponents.path = self.path
+            urlComponents.queryItems = self.querys
+            
+            return urlComponents.url
+        }
     }
 }
