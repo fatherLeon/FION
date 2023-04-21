@@ -19,7 +19,14 @@ struct PlayerModel: Hashable {
         self.position[position] = 1
     }
     
+    var mostUsedPosition: Int {
+        guard let positionNumber = position.sorted(by: { $0.value > $1.value }).first else { return 100 }
+        
+        return positionNumber.key
+    }
+    
     mutating func updateModel(by player: Player) {
+        self.count += 1
         if position[player.spPosition] == nil {
             position[player.spPosition] = 1
         } else {
