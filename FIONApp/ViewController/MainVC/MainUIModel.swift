@@ -175,6 +175,7 @@ final class MainUIModel {
         playerArr.forEach { player in
             guard let index = self.players.firstIndex(where: { $0.id == player.spID }) else {
                 self.players.append(PlayerModel(id: player.spID, position: player.spPosition))
+                return
             }
             
             self.players[index].updateModel(by: player)
