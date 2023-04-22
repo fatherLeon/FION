@@ -168,8 +168,10 @@ final class MainUIModel {
     
     private func makeTopUsedPlayer() {
         let players = self.players.sorted { $0.count > $1.count }
+        let index = players.index(players.startIndex, offsetBy: 100)
+        let topUsedPlayers = Array(players[players.startIndex...index])
         
-        self.topUsedPlayers = players
+        self.topUsedPlayers = topUsedPlayers
     }
     
     private func addPlayer(_ matches: [MatchInfo]) {

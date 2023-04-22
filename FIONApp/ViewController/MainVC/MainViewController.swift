@@ -81,9 +81,9 @@ class MainViewController: UIViewController {
                     
                     self?.navigationController?.pushViewController(matchesVC, animated: true)
                 }
-            case .failure(let error):
+            case .failure(_):
                 DispatchQueue.main.async {
-                    self?.presentErrorAlert(message: error.localizedDescription)
+                    self?.presentErrorAlert(message: "유저 이름을 확인해주세요")
                 }
             }
         }
