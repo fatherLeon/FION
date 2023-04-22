@@ -29,33 +29,21 @@ class MainViewController: UIViewController {
         configureUI()
         createDatasource()
         
-        modelManager.fetchPlayerImages {
+        modelManager.fetchPlayerImages { [weak self] in
             DispatchQueue.main.async {
-                let keeper = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.goalkeeper.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
-                let centerback = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.centerback.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
-                let sideback = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.sideback.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
-                let midfielder = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.midfielder.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
-                let winger = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.winger.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
-                let striker = self.modelManager.topUsedPlayers.sorted { $0.count > $1.count }.filter({ player in
-                    return PlayerSection.striker.positionNumber.contains(player.mostUsedPosition) && player.image != nil
-                })
+                guard let keeper = self?.modelManager.makeTopUsedPlayers(by: .goalkeeper),
+                      let centerback = self?.modelManager.makeTopUsedPlayers(by: .centerback),
+                      let sideback = self?.modelManager.makeTopUsedPlayers(by: .sideback),
+                      let midfielder = self?.modelManager.makeTopUsedPlayers(by: .midfielder),
+                      let winger = self?.modelManager.makeTopUsedPlayers(by: .winger),
+                      let striker = self?.modelManager.makeTopUsedPlayers(by: .striker) else { return }
                 
-                self.applySnapshot(by: .goalkeeper, to: keeper)
-                self.applySnapshot(by: .centerback, to: centerback)
-                self.applySnapshot(by: .sideback, to: sideback)
-                self.applySnapshot(by: .midfielder, to: midfielder)
-                self.applySnapshot(by: .winger, to: winger)
-                self.applySnapshot(by: .striker, to: striker)
+                self?.applySnapshot(by: .goalkeeper, to: keeper)
+                self?.applySnapshot(by: .centerback, to: centerback)
+                self?.applySnapshot(by: .sideback, to: sideback)
+                self?.applySnapshot(by: .midfielder, to: midfielder)
+                self?.applySnapshot(by: .winger, to: winger)
+                self?.applySnapshot(by: .striker, to: striker)
             }
         }
     }
