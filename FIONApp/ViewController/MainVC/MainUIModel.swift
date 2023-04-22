@@ -31,6 +31,14 @@ final class MainUIModel {
         fetchPlayerActionImage(handler: handler)
     }
     
+    func makeTopUsedPlayers(by position: PlayerSection) -> [PlayerModel] {
+        let topUsedPositionPlayer = self.topUsedPlayers.sorted(by: { $0.count > $1.count }).filter { player in
+            return position.positionNumber.contains(player.mostUsedPosition) && player.image != nil
+        }
+        
+        return topUsedPositionPlayer
+    }
+    
     private func fetchAllSeason() {
         let manager = NetworkManager(type: .season)
         group.enter()
