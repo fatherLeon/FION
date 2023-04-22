@@ -29,13 +29,13 @@ final class MainUIModel {
         fetchImages(handler: handler)
     }
     
-    private func fetchAllPlayers() {
-        let manager = NetworkManager(type: .allPlayer)
+    private func fetchAllSeason() {
+        let manager = NetworkManager(type: .season)
         group.enter()
-        manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
+        manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.players = data
+                self?.fetchSeasonImage(data)
                 self?.group.leave()
             case .failure(_):
                 return
@@ -45,13 +45,13 @@ final class MainUIModel {
         group.wait()
     }
     
-    private func fetchAllSeason() {
-        let manager = NetworkManager(type: .season)
+    private func fetchAllPlayers() {
+        let manager = NetworkManager(type: .allPlayer)
         group.enter()
-        manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
+        manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.fetchSeasonImage(data)
+                self?.players = data
                 self?.group.leave()
             case .failure(_):
                 return
