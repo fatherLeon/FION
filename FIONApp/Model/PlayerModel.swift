@@ -8,14 +8,15 @@
 import UIKit
 
 struct PlayerModel: Hashable {
-    let id = UUID()
+    let id : Int
     var count = 1
     var position: [Int: Int] = [:]
     var image: UIImage?
     var seasonImage: UIImage?
     var name: String?
     
-    init(position: Int) {
+    init(id: Int, position: Int) {
+        self.id = id
         self.position[position] = 1
     }
     

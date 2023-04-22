@@ -15,7 +15,7 @@ final class MainUIModel {
     private var matchIds: [String] = []
     private var allPlayer: [PlayerObject] = []
     private var seasonImage: [Int: UIImage?] = [:]
-    var players: [Int: PlayerModel] = [:]
+    var players: [PlayerModel] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
@@ -165,8 +165,8 @@ final class MainUIModel {
         }
     }
     
-    private func calculateUsedPlayer(_ players: [Player]) {
-        players.forEach { player in
+    private func calculateUsedPlayer(_ playerArr: [Player]) {
+        playerArr.forEach { player in
             if self.players[player.spID] == nil {
                 self.players[player.spID] = PlayerModel(position: player.spPosition)
             } else {
