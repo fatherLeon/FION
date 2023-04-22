@@ -94,9 +94,7 @@ final class MainUIModel {
     }
     
     private func fetchMatchDescData() {
-        guard let firstId = self.matchIds.first else { return }
-        
-        matchDescManager = NetworkManager(type: .match(matchid: firstId))
+        matchDescManager = NetworkManager(type: .match(matchid: ""))
         
         matchIds.forEach { id in
             group.enter()
