@@ -121,7 +121,7 @@ final class MainUIModel {
         }
         
         group.wait()
-        makeTopUsedPlayer()
+        createTopUsedPlayer()
     }
     
     private func fetchPlayerActionImage(handler: @escaping ((Bool, NetworkError?)) -> Void) {
@@ -166,12 +166,11 @@ final class MainUIModel {
         return seasonId
     }
     
-    private func makeTopUsedPlayer() {
-        let players = self.players.sorted { $0.count > $1.count }
-        let index = players.index(players.startIndex, offsetBy: 100)
-        let topUsedPlayers = Array(players[players.startIndex...index])
+    private func createTopUsedPlayer() {
+        let topUsedPlayers = Array(self.players[0...100])
+        let sortedTopUsedPlayers = topUsedPlayers.sorted { $0.count > $1.count }
         
-        self.topUsedPlayers = topUsedPlayers
+        self.topUsedPlayers = sortedTopUsedPlayers
     }
     
     private func addPlayer(_ matches: [MatchInfo]) {
