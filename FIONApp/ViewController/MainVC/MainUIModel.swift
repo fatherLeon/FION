@@ -15,7 +15,8 @@ final class MainUIModel {
     private var matchIds: [String] = []
     private var allPlayer: [PlayerObject] = []
     private var seasonImage: [Int: UIImage?] = [:]
-    var players: [PlayerModel] = []
+    private var players: [PlayerModel] = []
+    private var topUsedPlayers: [PlayerModel] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
@@ -114,7 +115,7 @@ final class MainUIModel {
     }
     
     private func fetchImages(handler: @escaping () -> Void) {
-        let playersIds = calculateTopUsedPlayer()
+        let playersIds = makeTopUsedPlayer()
         
         guard let firstId = playersIds.first else { return }
         
@@ -159,10 +160,10 @@ final class MainUIModel {
         return seasonId
     }
     
-    private func calculateTopUsedPlayer() -> [Int] {
+    private func makeTopUsedPlayer() {
         let players = self.players.sorted { $0.count > $1.count }
         
-        return players[0..<100].map { $0.id }
+        self.topUsedPlayers = players
     }
     
     private func addPlayer(_ matches: [MatchInfo]) {
