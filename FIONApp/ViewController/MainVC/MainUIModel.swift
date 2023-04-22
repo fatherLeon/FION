@@ -128,15 +128,15 @@ final class MainUIModel {
                     self?.group.leave()
                     guard let image = image,
                           let name = self?.allPlayer.filter({ $0.id == player.id }).first?.name,
-                          let index = self?.players.firstIndex(where: { $0.id == player.id }) else { return }
+                          let index = self?.topUsedPlayers.firstIndex(where: { $0.id == player.id }) else { return }
                     
-                    self?.players[index].image = image
-                    self?.players[index].name = name
+                    self?.topUsedPlayers[index].image = image
+                    self?.topUsedPlayers[index].name = name
                     
                     guard let seasonId = self?.makeSeasonId(player.id),
                           let seasonImage = self?.seasonImage[seasonId] else { return }
                     
-                    self?.players[index].seasonImage = seasonImage
+                    self?.topUsedPlayers[index].seasonImage = seasonImage
                 case .failure(_):
                     self?.group.leave()
                 }
