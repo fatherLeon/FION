@@ -128,21 +128,17 @@ final class MainUIModel {
                 switch result {
                 case .success(let image):
                     self?.group.leave()
-                    guard let image = image else { return }
+                    guard let image = image,
+                          let name = self?.allPlayer.filter({ $0.id == id }).first?.name,
+                          let index = self?.players.firstIndex(where: { $0.id == id }) else { return }
                     
-                    let name = self?.allPlayer.filter { $0.id == id }.first?.name
+                    self?.players[index].image = image
+                    self?.players[index].name = name
                     
-                    self?.players[id]?.image = image
-                    self?.players[id]?.name = name
+                    guard let seasonId = self?.makeSeasonId(id),
+                          let seasonImage = self?.seasonImage[seasonId] else { return }
                     
-                    let startIndex = "\(id)".startIndex
-                    let endIndex = "\(id)".index(startIndex, offsetBy: 2)
-                    let seasonId = "\(id)"[startIndex...endIndex]
-                    
-                    guard let key = Int(seasonId),
-                          let seasonImage = self?.seasonImage[key] else { return }
-                    
-                    self?.players[id]?.seasonImage = seasonImage
+                    self?.players[index].seasonImage = seasonImage
                 case .failure(_):
                     self?.group.leave()
                 }
@@ -151,6 +147,16 @@ final class MainUIModel {
         
         group.wait()
         handler()
+    }
+    
+    private func makeSeasonId(_ id: Int) -> Int? {
+        let startIndex = "\(id)".startIndex
+        let endIndex = "\(id)".index(startIndex, offsetBy: 2)
+        let seasonIdArr = "\(id)"[startIndex...endIndex]
+        
+        let seasonId = Int(seasonIdArr)
+        
+        return seasonId
     }
     
     private func calculateTopUsedPlayer() -> [Int] {
