@@ -31,22 +31,22 @@ class MainViewController: UIViewController {
         
         modelManager.fetchPlayerImages {
             DispatchQueue.main.async {
-                let keeper = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let keeper = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.goalkeeper.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
-                let centerback = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let centerback = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.centerback.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
-                let sideback = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let sideback = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.sideback.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
-                let midfielder = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let midfielder = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.midfielder.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
-                let winger = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let winger = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.winger.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
-                let striker = self.modelManager.playersCounter.values.sorted { $0.count > $1.count }.filter({ player in
+                let striker = self.modelManager.players.values.sorted { $0.count > $1.count }.filter({ player in
                     return PlayerSection.striker.positionNumber.contains(player.mostUsedPosition) && player.image != nil
                 })
                 

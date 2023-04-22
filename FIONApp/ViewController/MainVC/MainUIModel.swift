@@ -15,7 +15,7 @@ final class MainUIModel {
     private var matchIds: [String] = []
     private var allPlayer: [PlayerObject] = []
     private var seasonImage: [Int: UIImage?] = [:]
-    var playersCounter: [Int: PlayerModel] = [:]
+    var players: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
@@ -132,8 +132,8 @@ final class MainUIModel {
                     
                     let name = self?.allPlayer.filter { $0.id == id }.first?.name
                     
-                    self?.playersCounter[id]?.image = image
-                    self?.playersCounter[id]?.name = name
+                    self?.players[id]?.image = image
+                    self?.players[id]?.name = name
                     
                     let startIndex = "\(id)".startIndex
                     let endIndex = "\(id)".index(startIndex, offsetBy: 2)
@@ -142,7 +142,7 @@ final class MainUIModel {
                     guard let key = Int(seasonId),
                           let seasonImage = self?.seasonImage[key] else { return }
                     
-                    self?.playersCounter[id]?.seasonImage = seasonImage
+                    self?.players[id]?.seasonImage = seasonImage
                 case .failure(_):
                     self?.group.leave()
                 }
@@ -154,7 +154,7 @@ final class MainUIModel {
     }
     
     private func calculateTopTenUsedPlayer() -> [Int] {
-        let players = playersCounter.sorted { $0.value.count > $1.value.count }.map { $0.key }
+        let players = players.sorted { $0.value.count > $1.value.count }.map { $0.key }
         
         return players[0..<100].map { Int($0) }
     }
@@ -167,10 +167,10 @@ final class MainUIModel {
     
     private func calculateUsedPlayer(_ players: [Player]) {
         players.forEach { player in
-            if self.playersCounter[player.spID] == nil {
-                self.playersCounter[player.spID] = PlayerModel(position: player.spPosition)
+            if self.players[player.spID] == nil {
+                self.players[player.spID] = PlayerModel(position: player.spPosition)
             } else {
-                self.playersCounter[player.spID]?.updateModel(by: player)
+                self.players[player.spID]?.updateModel(by: player)
             }
         }
     }
