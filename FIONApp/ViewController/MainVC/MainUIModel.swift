@@ -45,22 +45,6 @@ final class MainUIModel {
         group.wait()
     }
     
-    private func fetchAllPlayers() {
-        let manager = NetworkManager(type: .allPlayer)
-        group.enter()
-        manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.players = data
-                self?.group.leave()
-            case .failure(_):
-                return
-            }
-        }
-        
-        group.wait()
-    }
-    
     private func fetchSeasonImage(_ data: [SeasonObject]) {
         guard let firstData = data.first else { return }
         
@@ -77,6 +61,22 @@ final class MainUIModel {
                 }
             }
         }
+    }
+    
+    private func fetchAllPlayers() {
+        let manager = NetworkManager(type: .allPlayer)
+        group.enter()
+        manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.players = data
+                self?.group.leave()
+            case .failure(_):
+                return
+            }
+        }
+        
+        group.wait()
     }
     
     private func fetchAllMatchData() {
