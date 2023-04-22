@@ -23,11 +23,11 @@ final class MainUIModel {
         manager.fetchDataByJson(to: type, handler: handler)
     }
     
-    func fetchPlayerImages(handler: @escaping () -> Void) {
-        fetchAllSeason()
-        fetchAllPlayers()
-        fetchAllMatchData()
-        fetchMatchDescData()
+    func fetchPlayerImages(handler: @escaping ((Bool, NetworkError?)) -> Void) {
+        fetchAllSeason(handler: handler)
+        fetchAllPlayers(handler: handler)
+        fetchAllMatchData(handler: handler)
+        fetchMatchDescData(handler: handler)
         fetchPlayerActionImage(handler: handler)
     }
     
@@ -39,7 +39,7 @@ final class MainUIModel {
         return topUsedPositionPlayer
     }
     
-    private func fetchAllSeason() {
+    private func fetchAllSeason(handler: @escaping ((Bool, NetworkError?)) -> Void) {
         let manager = NetworkManager(type: .season)
         group.enter()
         manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
@@ -47,11 +47,11 @@ final class MainUIModel {
             case .success(let data):
                 self?.fetchSeasonImage(data)
                 self?.group.leave()
-            case .failure(_):
-                return
+            case .failure(let error):
+                handler((false, error))
             }
         }
-        
+
         group.wait()
     }
     
@@ -71,7 +71,7 @@ final class MainUIModel {
         }
     }
     
-    private func fetchAllPlayers() {
+    private func fetchAllPlayers(handler: @escaping ((Bool, NetworkError?)) -> Void) {
         let manager = NetworkManager(type: .allPlayer)
         group.enter()
         manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
@@ -79,15 +79,15 @@ final class MainUIModel {
             case .success(let data):
                 self?.allPlayer = data
                 self?.group.leave()
-            case .failure(_):
-                return
+            case .failure(let error):
+                handler((false, error))
             }
         }
         
         group.wait()
     }
     
-    private func fetchAllMatchData() {
+    private func fetchAllMatchData(handler: @escaping ((Bool, NetworkError?)) -> Void) {
         let manager = NetworkManager(type: .allMatch())
         group.enter()
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
@@ -95,15 +95,15 @@ final class MainUIModel {
             case .success(let data):
                 self?.matchIds = data.matchIds
                 self?.group.leave()
-            case .failure(_):
-                return
+            case .failure(let error):
+                handler((false, error))
             }
         }
         
         group.wait()
     }
     
-    private func fetchMatchDescData() {
+    private func fetchMatchDescData(handler: @escaping ((Bool, NetworkError?)) -> Void) {
         matchDescManager = NetworkManager(type: .match(matchid: ""))
         
         matchIds.forEach { id in
@@ -114,8 +114,8 @@ final class MainUIModel {
                 case .success(let data):
                     self?.addPlayer(data.matchInfo)
                     self?.group.leave()
-                case .failure(_):
-                    return
+                case .failure(let error):
+                    handler((false, error))
                 }
             }
         }
@@ -124,7 +124,7 @@ final class MainUIModel {
         makeTopUsedPlayer()
     }
     
-    private func fetchPlayerActionImage(handler: @escaping () -> Void) {
+    private func fetchPlayerActionImage(handler: @escaping ((Bool, NetworkError?)) -> Void) {
         imageManager = NetworkManager(type: .actionImage(id: Int.random(in: 1...10)))
         
         self.topUsedPlayers.forEach { player in
@@ -153,7 +153,7 @@ final class MainUIModel {
         }
         
         group.wait()
-        handler()
+        handler((true, nil))
     }
     
     private func makeSeasonId(_ id: Int) -> Int? {

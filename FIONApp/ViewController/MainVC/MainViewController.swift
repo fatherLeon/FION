@@ -29,10 +29,17 @@ class MainViewController: UIViewController {
         configureUI()
         createDatasource()
         
-        modelManager.fetchPlayerImages { [weak self] in
-            DispatchQueue.main.async {
-                PlayerSection.allCases.forEach { position in
-                    self?.applySnapshotByPosition(position)
+        modelManager.fetchPlayerImages { [weak self] (isComplete, error) in
+            if isComplete {
+                DispatchQueue.main.async {
+                    PlayerSection.allCases.forEach { position in
+                        self?.applySnapshotByPosition(position)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    guard let error = error else { return }
+                    self?.presentErrorAlert(message: error.localizedDescription)
                 }
             }
         }
