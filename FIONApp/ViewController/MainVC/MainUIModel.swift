@@ -16,7 +16,8 @@ final class MainUIModel {
     private var allPlayer: [PlayerObject] = []
     private var seasonImage: [Int: UIImage?] = [:]
     private var players: [PlayerModel] = []
-    private var topUsedPlayers: [PlayerModel] = []
+    
+    var topUsedPlayers: [PlayerModel] = []
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         manager.fetchDataByJson(to: type, handler: handler)
