@@ -31,19 +31,9 @@ class MainViewController: UIViewController {
         
         modelManager.fetchPlayerImages { [weak self] in
             DispatchQueue.main.async {
-                guard let keeper = self?.modelManager.makeTopUsedPlayers(by: .goalkeeper),
-                      let centerback = self?.modelManager.makeTopUsedPlayers(by: .centerback),
-                      let sideback = self?.modelManager.makeTopUsedPlayers(by: .sideback),
-                      let midfielder = self?.modelManager.makeTopUsedPlayers(by: .midfielder),
-                      let winger = self?.modelManager.makeTopUsedPlayers(by: .winger),
-                      let striker = self?.modelManager.makeTopUsedPlayers(by: .striker) else { return }
-                
-                self?.applySnapshot(by: .goalkeeper, to: keeper)
-                self?.applySnapshot(by: .centerback, to: centerback)
-                self?.applySnapshot(by: .sideback, to: sideback)
-                self?.applySnapshot(by: .midfielder, to: midfielder)
-                self?.applySnapshot(by: .winger, to: winger)
-                self?.applySnapshot(by: .striker, to: striker)
+                PlayerSection.allCases.forEach { position in
+                    self?.applySnapshotByPosition(position)
+                }
             }
         }
     }
