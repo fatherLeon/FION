@@ -13,7 +13,7 @@ final class MainUIModel {
     private var imageManager: NetworkManager?
     
     private var matchIds: [String] = []
-    private var players: [PlayerObject] = []
+    private var allPlayer: [PlayerObject] = []
     private var seasonImage: [Int: UIImage?] = [:]
     var playersCounter: [Int: PlayerModel] = [:]
     
@@ -67,7 +67,7 @@ final class MainUIModel {
         manager.fetchDataByJson(to: [PlayerObject].self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.players = data
+                self?.allPlayer = data
                 self?.group.leave()
             case .failure(_):
                 return
@@ -132,7 +132,7 @@ final class MainUIModel {
                     self?.group.leave()
                     guard let image = image else { return }
                     
-                    let name = self?.players.filter { $0.id == id }.first?.name
+                    let name = self?.allPlayer.filter { $0.id == id }.first?.name
                     
                     self?.playersCounter[id]?.image = image
                     self?.playersCounter[id]?.name = name
