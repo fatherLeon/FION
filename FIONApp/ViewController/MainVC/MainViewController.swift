@@ -48,6 +48,12 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func applySnapshotByPosition(_ position: PlayerSection) {
+        let players = self.modelManager.makeTopUsedPlayers(by: position)
+        
+        applySnapshot(by: position, to: players)
+    }
+    
     private func applySnapshot(by section: PlayerSection, to model: [PlayerModel]) {
         snapshot.appendSections([section])
         snapshot.appendItems(model)
