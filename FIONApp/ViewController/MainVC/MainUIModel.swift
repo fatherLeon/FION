@@ -114,7 +114,7 @@ final class MainUIModel {
     }
     
     private func fetchImages(handler: @escaping () -> Void) {
-        let playersIds = calculateTopTenUsedPlayer()
+        let playersIds = calculateTopUsedPlayer()
         
         guard let firstId = playersIds.first else { return }
         
@@ -153,10 +153,10 @@ final class MainUIModel {
         handler()
     }
     
-    private func calculateTopTenUsedPlayer() -> [Int] {
-        let players = players.sorted { $0.value.count > $1.value.count }.map { $0.key }
+    private func calculateTopUsedPlayer() -> [Int] {
+        let players = self.players.sorted { $0.count > $1.count }
         
-        return players[0..<100].map { Int($0) }
+        return players[0..<100].map { $0.id }
     }
     
     private func addPlayer(_ matches: [MatchInfo]) {
