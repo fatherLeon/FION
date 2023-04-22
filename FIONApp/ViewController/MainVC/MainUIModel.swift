@@ -14,7 +14,7 @@ final class MainUIModel {
     
     private var matchIds: [String] = []
     private var players: [PlayerObject] = []
-    private var seasonCounter: [Int: UIImage?] = [:]
+    private var seasonImage: [Int: UIImage?] = [:]
     var playersCounter: [Int: PlayerModel] = [:]
     
     func fetchUserDataByJson<T>(manager: NetworkManager, _ type: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
@@ -46,16 +46,14 @@ final class MainUIModel {
     }
     
     private func fetchSeasonImage(_ data: [SeasonObject]) {
-        guard let firstData = data.first else { return }
-        
-        var networkModel = NetworkManager(type: .url(url: firstData.seasonImg))
+        var networkModel = NetworkManager(type: .url(url: ""))
         
         data.forEach { season in
             networkModel.changeContentType(.url(url: season.seasonImg))
             networkModel.fetchDataByImage { [weak self] result in
                 switch result {
                 case .success(let image):
-                    self?.seasonCounter[season.seasonId] = image
+                    self?.seasonImage[season.seasonId] = image
                 case .failure(_):
                     return
                 }
@@ -144,7 +142,7 @@ final class MainUIModel {
                     let seasonId = "\(id)"[startIndex...endIndex]
                     
                     guard let key = Int(seasonId),
-                          let seasonImage = self?.seasonCounter[key] else { return }
+                          let seasonImage = self?.seasonImage[key] else { return }
                     
                     self?.playersCounter[id]?.seasonImage = seasonImage
                 case .failure(_):
