@@ -167,11 +167,11 @@ final class MainUIModel {
     
     private func calculateUsedPlayer(_ playerArr: [Player]) {
         playerArr.forEach { player in
-            if self.players[player.spID] == nil {
-                self.players[player.spID] = PlayerModel(position: player.spPosition)
-            } else {
-                self.players[player.spID]?.updateModel(by: player)
+            guard let index = self.players.firstIndex(where: { $0.id == player.spID }) else {
+                self.players.append(PlayerModel(id: player.spID, position: player.spPosition))
             }
+            
+            self.players[index].updateModel(by: player)
         }
     }
 }
