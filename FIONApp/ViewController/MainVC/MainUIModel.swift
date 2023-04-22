@@ -27,7 +27,7 @@ final class MainUIModel {
         fetchAllPlayers()
         fetchAllMatchData()
         fetchMatchDescData()
-        fetchImages(handler: handler)
+        fetchPlayerActionImage(handler: handler)
     }
     
     private func fetchAllSeason() {
@@ -115,27 +115,25 @@ final class MainUIModel {
         makeTopUsedPlayer()
     }
     
-    private func fetchImages(handler: @escaping () -> Void) {
-        guard let firstId = playersIds.first else { return }
+    private func fetchPlayerActionImage(handler: @escaping () -> Void) {
+        imageManager = NetworkManager(type: .actionImage(id: Int.random(in: 1...10)))
         
-        imageManager = NetworkManager(type: .actionImage(id: firstId))
-        
-        playersIds.forEach { id in
+        self.topUsedPlayers.forEach { player in
             group.enter()
-            imageManager?.changeContentType(.actionImage(id: id))
+            imageManager?.changeContentType(.actionImage(id: player.id))
             
             imageManager?.fetchDataByImage { [weak self] result in
                 switch result {
                 case .success(let image):
                     self?.group.leave()
                     guard let image = image,
-                          let name = self?.allPlayer.filter({ $0.id == id }).first?.name,
-                          let index = self?.players.firstIndex(where: { $0.id == id }) else { return }
+                          let name = self?.allPlayer.filter({ $0.id == player.id }).first?.name,
+                          let index = self?.players.firstIndex(where: { $0.id == player.id }) else { return }
                     
                     self?.players[index].image = image
                     self?.players[index].name = name
                     
-                    guard let seasonId = self?.makeSeasonId(id),
+                    guard let seasonId = self?.makeSeasonId(player.id),
                           let seasonImage = self?.seasonImage[seasonId] else { return }
                     
                     self?.players[index].seasonImage = seasonImage
