@@ -112,11 +112,10 @@ final class MainUIModel {
         }
         
         group.wait()
+        makeTopUsedPlayer()
     }
     
     private func fetchImages(handler: @escaping () -> Void) {
-        let playersIds = makeTopUsedPlayer()
-        
         guard let firstId = playersIds.first else { return }
         
         imageManager = NetworkManager(type: .actionImage(id: firstId))
