@@ -10,6 +10,8 @@ import UIKit
 struct NetworkManager {
     private var type: ContentType
     private let provider: Providable
+    private var task: URLSessionDataTask?
+    private var isStopSession: Bool = false
     
     init(provider: Providable = APIProvider(session: .shared), type: ContentType) {
         self.provider = provider
@@ -20,13 +22,18 @@ struct NetworkManager {
         self.type = type
     }
     
-    func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
+    mutating func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
+        if isStopSession {
+            task?.cancel()
+            return
+        }
+        
         guard let request = provider.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
         }
         
-        let task = provider.makeURLSessionDataTask(request: request) { result in
+        task = provider.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
                 guard let decodingData = DecoderModel().decodeToJson(type: decodingType, by: data) else {
@@ -43,13 +50,18 @@ struct NetworkManager {
         task?.resume()
     }
     
-    func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
+    mutating func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
+        if isStopSession {
+            task?.cancel()
+            return
+        }
+        
         guard let request = provider.makeRequest(contentType: self.type) else {
             handler(.failure(.invalidURL))
             return
         }
         
-        let task = provider.makeURLSessionDataTask(request: request) { result in
+        task = provider.makeURLSessionDataTask(request: request) { result in
             switch result {
             case .success(let data):
                 let image = DecoderModel().decodeToImage(by: data)
