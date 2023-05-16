@@ -90,7 +90,7 @@ final class MainUIModel {
     }
     
     private func fetchAllMatchData(handler: @escaping ((Bool, NetworkError?)) -> Void) {
-        var manager = NetworkManager(type: .allMatch())
+        let manager = NetworkManager(type: .allMatch())
         group.enter()
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
@@ -169,9 +169,7 @@ final class MainUIModel {
     }
     
     private func createTopUsedPlayer() {
-        let sortedTopUsedPlayers = self.players
-            .sorted { $0.count > $1.count }
-            .filter { $0.count > 2 }
+        let sortedTopUsedPlayers = self.players.sorted { $0.count > $1.count }
         
         self.topUsedPlayers = sortedTopUsedPlayers
     }
