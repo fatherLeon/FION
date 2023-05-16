@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchesViewController: UITableViewController {
+final class MatchesViewController: UITableViewController {
     
     var userID: String = ""
     var userName: String = ""

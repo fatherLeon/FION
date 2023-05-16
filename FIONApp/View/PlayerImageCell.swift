@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayerImageCell: UICollectionViewCell {
+final class PlayerImageCell: UICollectionViewCell {
     
     private let infoStackView = UIStackView()
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MatchManager {
+final class MatchManager {
     private let matchId: [String]
     private var networkManagers: [NetworkManager] = []
     var matchesInfo: [MatchObject] = []
