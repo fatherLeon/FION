@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - MatchObject
-struct MatchObject: Codable {
+struct MatchObject: Hashable, Codable {
+
     let matchID, matchDate: String
     let matchType: Int
     let matchInfo: [MatchInfo]
@@ -19,8 +19,7 @@ struct MatchObject: Codable {
     }
 }
 
-// MARK: - MatchInfo
-struct MatchInfo: Codable {
+struct MatchInfo: Hashable, Codable {
     let accessID, nickname: String
     let matchDetail: MatchDetail
     let shoot: [String: Int]
@@ -35,13 +34,11 @@ struct MatchInfo: Codable {
     }
 }
 
-// MARK: - Defence
-struct Defence: Codable {
+struct Defence: Hashable, Codable {
     let blockTry, blockSuccess, tackleTry, tackleSuccess: Int
 }
 
-// MARK: - MatchDetail
-struct MatchDetail: Codable {
+struct MatchDetail: Hashable, Codable {
     let seasonID: Int
     let matchResult: String
     let matchEndType, systemPause, foul, injury: Int
@@ -56,8 +53,7 @@ struct MatchDetail: Codable {
     }
 }
 
-// MARK: - Player
-struct Player: Codable {
+struct Player: Hashable, Codable {
     let spID, spPosition, spGrade: Int
     let status: [String: Double]
 
@@ -68,7 +64,7 @@ struct Player: Codable {
 }
 
 // MARK: - ShootDetail
-struct ShootDetail: Codable {
+struct ShootDetail: Hashable, Codable {
     let goalTime: Int
     let x, y: Double
     let type, result, spID, spGrade: Int

@@ -74,10 +74,7 @@ final class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    let matchesVC = MatchesViewController(style: .insetGrouped)
-                    
-                    matchesVC.userName = data.name
-                    matchesVC.userID = data.userId
+                    let matchesVC = MatchesViewController(userID: data.userId, userName: data.name)
                     
                     self?.navigationController?.pushViewController(matchesVC, animated: true)
                 }
@@ -148,7 +145,6 @@ extension MainViewController {
 
 // MARK: - UI
 extension MainViewController {
-    
     private func presentErrorAlert(message: String) {
         let alertController = UIAlertController(title: message,
                                                 message: nil,
