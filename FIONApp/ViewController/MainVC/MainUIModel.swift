@@ -31,6 +31,22 @@ final class MainUIModel {
         fetchPlayerActionImage(handler: handler)
     }
     
+    private func fetchAllSeason(handler: @escaping ((Bool, NetworkError?)) -> Void) {
+        let manager = NetworkManager(type: .season)
+        group.enter()
+        manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.fetchSeasonImage(data)
+            case .failure(let error):
+                handler((false, error))
+            }
+            self?.group.leave()
+        }
+
+        group.wait()
+    }
+    
     func makeTopUsedPlayers(by position: PlayerSection) -> [PlayerModel] {
         let topUsedPositionPlayer = self.topUsedPlayers.sorted(by: { $0.count > $1.count }).filter { player in
             return position.positionNumber.contains(player.mostUsedPosition) && player.image != nil
@@ -39,24 +55,8 @@ final class MainUIModel {
         return topUsedPositionPlayer
     }
     
-    private func fetchAllSeason(handler: @escaping ((Bool, NetworkError?)) -> Void) {
-        let manager = NetworkManager(type: .season)
-        group.enter()
-        manager.fetchDataByJson(to: [SeasonObject].self) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.fetchSeasonImage(data)
-                self?.group.leave()
-            case .failure(let error):
-                handler((false, error))
-            }
-        }
-
-        group.wait()
-    }
-    
     private func fetchSeasonImage(_ data: [SeasonObject]) {
-        var networkModel = NetworkManager(type: .url(url: ""))
+        let networkModel = NetworkManager(type: .url(url: ""))
         
         data.forEach { season in
             networkModel.changeContentType(.url(url: season.seasonImg))
@@ -78,26 +78,26 @@ final class MainUIModel {
             switch result {
             case .success(let data):
                 self?.allPlayer = data
-                self?.group.leave()
             case .failure(let error):
                 handler((false, error))
             }
+            self?.group.leave()
         }
         
         group.wait()
     }
     
     private func fetchAllMatchData(handler: @escaping ((Bool, NetworkError?)) -> Void) {
-        let manager = NetworkManager(type: .allMatch())
+        var manager = NetworkManager(type: .allMatch())
         group.enter()
         manager.fetchDataByJson(to: UserMatchObject.self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.matchIds = data.matchIds
-                self?.group.leave()
             case .failure(let error):
                 handler((false, error))
             }
+            self?.group.leave()
         }
         
         group.wait()
@@ -113,10 +113,10 @@ final class MainUIModel {
                 switch result {
                 case .success(let data):
                     self?.addPlayer(data.matchInfo)
-                    self?.group.leave()
                 case .failure(let error):
                     handler((false, error))
                 }
+                self?.group.leave()
             }
         }
         
@@ -167,8 +167,7 @@ final class MainUIModel {
     }
     
     private func createTopUsedPlayer() {
-        let topUsedPlayers = Array(self.players[0...100])
-        let sortedTopUsedPlayers = topUsedPlayers.sorted { $0.count > $1.count }
+        let sortedTopUsedPlayers = Array(self.players.sorted { $0.count > $1.count })
         
         self.topUsedPlayers = sortedTopUsedPlayers
     }

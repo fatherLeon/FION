@@ -23,16 +23,16 @@ class MatchManager {
     }
     
     func fetchMatchInfo() {
-        networkManagers.forEach { manager in
-            manager.fetchDataByJson(to: MatchObject.self) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    self?.matchesInfo.append(data)
-                    NotificationCenter.default.post(name: .matchesInfo, object: nil)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+//        networkManagers.forEach { manager in
+//            manager.fetchDataByJson(to: MatchObject.self) { [weak self] result in
+//                switch result {
+//                case .success(let data):
+//                    self?.matchesInfo.append(data)
+//                    NotificationCenter.default.post(name: .matchesInfo, object: nil)
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//        }
     }
 }

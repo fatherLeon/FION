@@ -120,7 +120,7 @@ extension MainViewController {
         guard let collectionView = self.collectionView else { return }
         
         let cellRegistration = UICollectionView.CellRegistration<PlayerImageCell, PlayerModel> { cell, indexPath, itemIdentifier in
-            cell.contentView.layer.borderColor = UIColor.black.cgColor
+            cell.contentView.layer.borderColor = UIColor.label.cgColor
             cell.contentView.layer.borderWidth = 1
             cell.contentView.layer.cornerRadius = 8
             

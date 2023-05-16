@@ -34,6 +34,7 @@ class PlayerImageCell: UICollectionViewCell {
 
 extension PlayerImageCell {
     private func configureUI() {
+        
         configurePlayerImageView()
         cofigurePlayerInfoStackView()
         configureMainStackView()

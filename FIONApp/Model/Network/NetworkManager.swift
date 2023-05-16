@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct NetworkManager {
+final class NetworkManager {
     private var type: ContentType
     private let provider: Providable
     private var task: URLSessionDataTask?
@@ -18,12 +18,12 @@ struct NetworkManager {
         self.type = type
     }
     
-    mutating func changeContentType(_ type: ContentType) {
+    func changeContentType(_ type: ContentType) {
         self.type = type
     }
     
-    mutating func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
-        if isStopSession {
+    func fetchDataByJson<T>(to decodingType: T.Type, handler: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
+        guard !isStopSession else {
             task?.cancel()
             return
         }
@@ -50,8 +50,8 @@ struct NetworkManager {
         task?.resume()
     }
     
-    mutating func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
-        if isStopSession {
+    func fetchDataByImage(handler: @escaping (Result<UIImage?, NetworkError>) -> Void) {
+        guard !isStopSession else {
             task?.cancel()
             return
         }
