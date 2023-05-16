@@ -48,7 +48,9 @@ final class MainUIModel {
     }
     
     func makeTopUsedPlayers(by position: PlayerSection) -> [PlayerModel] {
-        let topUsedPositionPlayer = self.topUsedPlayers.sorted(by: { $0.count > $1.count }).filter { player in
+        let topUsedPositionPlayer = self.topUsedPlayers
+            .sorted { $0.count > $1.count }
+            .filter { player in
             return position.positionNumber.contains(player.mostUsedPosition) && player.image != nil
         }
         
