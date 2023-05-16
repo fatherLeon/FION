@@ -167,7 +167,9 @@ final class MainUIModel {
     }
     
     private func createTopUsedPlayer() {
-        let sortedTopUsedPlayers = Array(self.players.sorted { $0.count > $1.count })
+        let sortedTopUsedPlayers = self.players
+            .sorted { $0.count > $1.count }
+            .filter { $0.count > 2 }
         
         self.topUsedPlayers = sortedTopUsedPlayers
     }
