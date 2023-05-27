@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchTableViewCell: UITableViewCell {
+final class MatchTableViewCell: UITableViewCell {
     
     static let identifier = "MatchTableViewCell"
     

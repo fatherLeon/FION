@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2604313B29D9508700085876 /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2604313A29D9508700085876 /* MatchManager.swift */; };
-		2604313D29D9588F00085876 /* Notification.Name+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2604313C29D9588F00085876 /* Notification.Name+extension.swift */; };
+		2604313B29D9508700085876 /* MatchesUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2604313A29D9508700085876 /* MatchesUIModel.swift */; };
 		26058CE029C8798700DC3EEA /* APIKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26058CDF29C8798700DC3EEA /* APIKey.plist */; };
 		26058CE229C879D100DC3EEA /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE129C879D100DC3EEA /* Bundle+extension.swift */; };
 		26058CE429C8819500DC3EEA /* UserInfoObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26058CE329C8819500DC3EEA /* UserInfoObject.swift */; };
@@ -54,8 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2604313A29D9508700085876 /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
-		2604313C29D9588F00085876 /* Notification.Name+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+extension.swift"; sourceTree = "<group>"; };
+		2604313A29D9508700085876 /* MatchesUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesUIModel.swift; sourceTree = "<group>"; };
 		26058CDF29C8798700DC3EEA /* APIKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKey.plist; sourceTree = "<group>"; };
 		26058CE129C879D100DC3EEA /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
 		26058CE329C8819500DC3EEA /* UserInfoObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoObject.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			children = (
 				26058CE129C879D100DC3EEA /* Bundle+extension.swift */,
 				264EDB7F29D8933000EAA0EF /* Date+extension.swift */,
-				2604313C29D9588F00085876 /* Notification.Name+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -154,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				26D3562329D870E6003940C2 /* MatchesViewController.swift */,
-				2604313A29D9508700085876 /* MatchManager.swift */,
+				2604313A29D9508700085876 /* MatchesUIModel.swift */,
 			);
 			path = MatchVC;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 			files = (
 				266398A529EDDD3A0032033F /* DecoderModel.swift in Sources */,
 				26FC683929C9D66200B398E2 /* APIProvider.swift in Sources */,
-				2604313D29D9588F00085876 /* Notification.Name+extension.swift in Sources */,
 				26AD317C29B3B1A4001E8BE4 /* MainViewController.swift in Sources */,
 				264EDB7E29D8925300EAA0EF /* MatchTableViewCell.swift in Sources */,
 				26AD317829B3B1A4001E8BE4 /* AppDelegate.swift in Sources */,
@@ -380,7 +376,7 @@
 				26D7C26429F1FCDC008A5FE2 /* PlayerImageCell.swift in Sources */,
 				261E699529EEC89F00E77A14 /* Providable.swift in Sources */,
 				26E050D829F2C1A700A27EE5 /* PlayerImageHeaderView.swift in Sources */,
-				2604313B29D9508700085876 /* MatchManager.swift in Sources */,
+				2604313B29D9508700085876 /* MatchesUIModel.swift in Sources */,
 				26E050D629F27FB700A27EE5 /* SeasonObject.swift in Sources */,
 				264EDB8029D8933000EAA0EF /* Date+extension.swift in Sources */,
 				26E050D429F279FD00A27EE5 /* PlayerObject.swift in Sources */,
