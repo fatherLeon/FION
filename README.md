@@ -1,7 +1,6 @@
 # FION App
 
-> 최근 사용자들이 많이 사용하는 선수 표시 및 플레이어들의 전적 검색 어플
-> 사용 API - [Data based on NEXON DEVELOPERS](https://developers.nexon.com/fifaonline4)
+> 최근 사용자들이 많이 사용하는 선수 표시 및 플레이어들의 전적 검색 어플[(Data based on NEXON DEVELOPERS)](https://developers.nexon.com/fifaonline4)
 
 ## 프로젝트 핵심 경험
 
